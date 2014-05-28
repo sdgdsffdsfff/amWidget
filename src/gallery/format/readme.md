@@ -18,12 +18,12 @@ API文档: [http://site.alipay.im/AM/about/about.html](http://site.alipay.im/AM/
 
 * 自动绑定  
   
-  ```
+  ```html
   <input type="text" data-format="4 " value="abcdefghijkmln" />
   ```
 * 手动绑定（用于动态追加元素时绑定格式化事件） 
 
-  ```
+  ```javascript
   AW.InputFormat.listen(HTMLInputElement); 
   ```
  
