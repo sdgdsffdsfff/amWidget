@@ -1,78 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>demo</title>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no,email=no"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
-    <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/anima/dpl/1.1.0/amui.css" media="all">
-
-    <link rel="stylesheet" href="dialog.css">
-
-    <style>
-        body {
-            margin: 0;
-        }
-        .am-content {
-            padding: 10px;
-        }
-
-        .am-dialog {
-            -webkit-box-sizing: border-box;
-            -ms-box-sizing: border-box;
-            box-sizing: border-box;
-            position: fixed;
-            top: 50%;
-            z-index: 101;
-            width: 100%;
-            padding: 0 20px;
-            margin-top: -100px;
-        }
-        .am-dialog-title {
-            padding-top: 7px;
-            text-align: center;
-            font-weight: 700;
-        }
-        .am-dialog-content {
-            margin: auto;
-            max-width: 320px;
-            padding: 10px;
-            background: #e8e8e8;
-            border-radius: 8px;
-        }
-        .am-dialog p {
-            margin: 14px 0 24px 0;
-            text-align: center;
-        }
-        .am-dialog-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
-    </style>
-</head>
-<body>
-<div class="am-content nico-insert-code">
-    <input type="button" class="am-button J-toast-show" value="点我显示">
-    <br /><br />
-    <input type="button" class="am-button J-toast-hide" value="点我隐藏">
-
-</div>
-<div class="am-example am-example-dialog" style="position:relative;height:480px;">
-
-    <div class="J-am-dialog" syle="visibility: hidden;">
-
-    </div>
-
-</div>
-
-<script type="text/javascript">
 /**
  *
  * AW dialog
@@ -216,19 +141,19 @@
             if (_self.attrs.type == 'success') { _self.attrs.type = 'right' }
             else if (_self.attrs.type == 'error') { _self.attrs.type = 'wrong' }
             el.innerHTML = '<div class="am-dialog">'
-                    + '    <div class=" am-dialog-content">'
-                    + '        <div class="am-dialog-title">' + _self.attrs.title + '</div>'
-                    + '        <p>' + _self.attrs.message + '</p>'
-                    + '        <div class="am-flexbox am-flexbox-average">'
-                    + '            <div class="am-flexbox-item">'
-                    + '                <button type="button" class="J-dialog-cancel am-button am-button-white">取消</button>'
-                    + '            </div>'
-                    + '            <div class="am-flexbox-item">'
-                    + '                <button type="button" class="J-dialog-success am-button am-button-blue">' + _self.attrs.button + '</button>'
-                    + '            </div>'
-                    + '        </div>'
-                    + '    </div>'
-                    + '</div>'
+                + '    <div class=" am-dialog-content">'
+                + '        <div class="am-dialog-title">' + _self.attrs.title + '</div>'
+                + '        <p>' + _self.attrs.message + '</p>'
+                + '        <div class="am-flexbox am-flexbox-average">'
+                + '            <div class="am-flexbox-item">'
+                + '                <button type="button" class="J-dialog-cancel am-button am-button-white">取消</button>'
+                + '            </div>'
+                + '            <div class="am-flexbox-item">'
+                + '                <button type="button" class="J-dialog-success am-button am-button-blue">' + _self.attrs.button + '</button>'
+                + '            </div>'
+                + '        </div>'
+                + '    </div>'
+                + '</div>'
             document.querySelector('.J-dialog-cancel').addEventListener("click", function (ele) {
                 _self.hide();
             }, false);
@@ -261,28 +186,3 @@
     };
     return dialog;
 });
-
-
-//业务代码
-dialog = new AW.dialog({
-    target: '.J-am-dialog',
-    title: '亲',
-    message: '这里是默认文案，请添加',
-    button : '确认添加',
-    animate: 'none',
-    isWebview: true
-});
-
-document.querySelector('.J-toast-show').addEventListener("click", function (ele) {
-    dialog.show(function() {
-        console.log('show up!')
-    });
-}, false);
-document.querySelector('.J-toast-hide').addEventListener("click", function (ele) {
-    dialog.hide();
-}, false);
-</script>
-
-
-</body>
-</html>
