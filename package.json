@@ -1,6 +1,6 @@
 {
-  "family": "amj",
-  "name": "amj",
+  "family": "aw",
+  "name": "aw",
   "version": "1.0.0",
   "description": "alipay mobile js widget",
   "homepage": "",
@@ -16,12 +16,5 @@
     "url": ""
   },
   "keywords": [],
-  "licenses": "MIT",
-  "spm": {
-    "output": [
-    ],
-    "alias": {},
-    "devAlias": {},
-    "engines": {}
-  }
+  "licenses": "MIT"
 }
