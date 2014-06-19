@@ -7,22 +7,24 @@
 API文档: [http://site.alipay.im/AM/about/about.html](http://site.alipay.im/AM/about/about.html)
 
 
-### 如何使用
+### 接口列表
 
-1. 引入包含`InputFormat`功能的JS文件；
-2. 在目标文本框中定义`data-format`属性，属性值为`字符位数`+`分隔符`组成的规则；
-3. 页面加载完成后会自动绑定其`input`事件；
+```
+	/**
+	 * @desc        输入事件监听
+	 * @param       {HTMLInputElement[]}    list    要监听的文本框元素
+	 * @name        AW.InputFormat.listen
+	 */
+	kbc.listen = function (list)
+	
+```
 
+### 示例代码
 
-### 示例
+```
+	formatVal('abcdefghijkmln', '4 ');	//需要格式化的值为'abcdefghijkmln'，规则为4位一组，以空格分隔开
+		returns 'abcd efgh ijkm ln'		//则返回值为'abcd efgh ijkm ln'
+	kbc.listen(list)					//list为要监听的元素以数组形式的集合
+```
 
-* 自动绑定  
-  
-  ```html
-  <input type="text" data-format="4 " value="abcdefghijkmln" />
-  ```
-* 手动绑定（用于动态追加元素时绑定格式化事件） 
-
-  ```javascript
-  AW.InputFormat.listen(HTMLInputElement); 
-  ```
+### 演示 可选
