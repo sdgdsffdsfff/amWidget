@@ -26,9 +26,3 @@ API文档: [http://site.alipay.im/AM/about/about.html](http://site.alipay.im/AM/
   ```javascript
   AW.InputFormat.listen(HTMLInputElement); 
   ```
- 
-### 更新日志
-
-* 2014-05-27
-	* 基本功能实现
-	* 增加文档初始化后自动绑定文本框事件功能
