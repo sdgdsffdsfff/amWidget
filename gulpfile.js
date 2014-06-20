@@ -8,7 +8,7 @@ gulp.task('am-transport', function () {
 		.pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('buildDoc', function () {
+gulp.task('doc', function () {
 	gulp.src('./doc/*.md')
 		.pipe(concat('aw-doc.md'))
 		.pipe(gulp.dest('./doc/build'))
