@@ -1,15 +1,26 @@
 ## button
-	设置指定按钮的点击事件函数
+	模拟按钮在按下移动后回复无点击状态
 
-### 使用方法
+### 示例代码
 
 html
 ```
-<button data-active-class="hover">
+<button data-active-class="hover">			//声明按下的状态效果class名为hover, 默认为active
 ```
 js
 ```
-
+	在html的基础上可以再详细的设置
+	var oBtn = new Button(document.getElementById('btn')});	//将#btn作为Button的实例化
+	oBtn.timeLock = 1000;			//1000毫秒内不可以再次触发事件
+	oBtn.autoDisabled = true;		//按钮不可点击
+	oBtn.unlock = true;				//按钮立刻可以点击并触发事件
+	oBtn.tap(						//绑定指定的点击事件，在1000毫秒内不可再次触发亦不可点击
+		function(){
+			//指定事件
+		}, 
+		1000,
+		true
+	)
 ```
 
 ### 接口列表
@@ -56,20 +67,5 @@ js
 	Button.prototype.unlock = function ()
 ```
 
-### 示例代码
-
-```
-	var oBtn = new Button(document.getElementById('btn')});	//将#btn作为Button的实例化
-	oBtn.timeLock = 1000;			//1000毫秒内不可以再次触发事件
-	oBtn.autoDisabled = true;		//按钮不可点击
-	oBtn.unlock = true;				//按钮立刻可以点击并触发事件
-	oBtn.tap(						//绑定指定的点击事件，在1000毫秒内不可再次触发亦不可点击
-		function(){
-			//指定事件
-		}, 
-		1000,
-		true
-	)
-```
 
 ### 演示

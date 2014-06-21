@@ -1,6 +1,40 @@
 ## toast
 	控制页面中提示窗的显示及设置参数
 
+	
+### 示例代码
+js
+```
+	/**
+	 * 默认配置参数
+	 *
+	 * @memberof AW.loading
+	 * @param {!Object} target - className，node对象
+	 * @param {!String} message - 默认文案
+	 * @param {String} type - 类型（success | error | loading）
+	 * @param {Number} hideDelay - 延迟隐藏时间（毫秒）
+	 * @param {Number} showDelay - 延迟显示时间（毫秒）
+	 * @param {String} animate - 动画效果
+	 * @param {Boolean} isWebview - 是否开启容器调用（开启后不在容器则不调用）
+	 *
+	 * @desc 默认配置参数
+	 *
+	 */
+	 
+	var opt = {
+		target: '.J-am-toast',					//className
+		message: '这里是默认文案，请添加',		//默认文案
+		type: 'none',							//类型名
+		hideDelay: '2500',						//延迟隐藏
+		showDelay: '0',							//延迟显示
+		animate: 'none',						//动画效果
+		isWebview: true							//是否开启容器调用
+	}
+	
+	toast(opt);	//开启窗口
+```
+
+
 ### 接口列表
 
 ```
@@ -44,36 +78,5 @@
 	
 ```
 
-### 示例代码
-
-```
-	/**
-	 * 默认配置参数
-	 *
-	 * @memberof AW.loading
-	 * @param {!Object} target - className，node对象
-	 * @param {!String} message - 默认文案
-	 * @param {String} type - 类型（success | error | loading）
-	 * @param {Number} hideDelay - 延迟隐藏时间（毫秒）
-	 * @param {Number} showDelay - 延迟显示时间（毫秒）
-	 * @param {String} animate - 动画效果
-	 * @param {Boolean} isWebview - 是否开启容器调用（开启后不在容器则不调用）
-	 *
-	 * @desc 默认配置参数
-	 *
-	 */
-	 
-	var opt = {
-		target: '.J-am-toast',
-		message: '这里是默认文案，请添加',
-		type: 'none',
-		hideDelay: '2500',
-		showDelay: '0',
-		animate: 'none',
-		isWebview: true
-	}
-	
-	dialog(opt);	//开启窗口
-```
 
 ### 演示 可选
