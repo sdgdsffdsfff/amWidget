@@ -10,7 +10,12 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <link rel="stylesheet" type="text/css" href="http://static.alipayobjects.com/amui/base/1.0.1/amui-https.css"
           media="all">
+    <link rel="stylesheet" href="test.css"/>
     <style type="text/css">
+        body {
+
+        }
+
         input {
             height: 24px;
             margin: 10px 0;
@@ -21,10 +26,23 @@
             padding: 10px;
         }
     </style>
-    <script type="text/javascript" src="../src/gallery/input/input.js"></script>
+    <script src="zepto.js"></script>
+    <script type="text/javascript" src="../dist/gallery/input/input.js"></script>
 </head>
 <body>
+4个字符中一个空格<input type="text" data-format="4 " value="abcdefghijkmln"/><br/>
+4个字符中一个逗号<input type="text" data-format="4," value="abcdefghijkmln"/>
 
-格式化"4个字符中一个空格"<input type="text" data-format="4 " value="abcdefghijkmln"/>
+<h5>动态添加格式化</h5>
+<script type="text/javascript">
+    window.setTimeout(function () {
+        $(document.body).append('<input type="text" value="fdasfa" data-format="3#" class="test"/><button class="addFormat">增加input功能</button>');
+    }, 200);
+
+    var input = window.AW.input;
+    $(".addFormat").live("click", function () {
+        input.listen(document.querySelectorAll(".test"));
+    });
+</script>
 </body>
 </html>

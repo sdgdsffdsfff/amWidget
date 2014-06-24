@@ -13,9 +13,7 @@ html
 js
 ```
 	var list = document.getElementsByTagName("input");	//获取输入框元素集
-	kbc.listen(list)					//list为要监听的元素以数组形式的集合
-	formatVal('abcdefghijkmln', '4 ');	//需要格式化的值为'abcdefghijkmln'，规则为4位一组，以空格分隔开
-		returns 'abcd efgh ijkm ln'		//则返回值为'abcd efgh ijkm ln'
+	kbc.listen(list);					//list为要监听的元素以数组形式的集合
 ```
 
 

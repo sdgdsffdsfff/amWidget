@@ -268,5 +268,5 @@ if (document.readyState === 'complete') {
 		kbc.listen();
 	}, false);
 }
-
-module.exports = kbc;
+var input = kbc;
+module.exports = input;
