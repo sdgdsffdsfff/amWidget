@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 gulp.task('am-transport', function () {
 	gulp.src('./src/**/*.js')
-		.pipe(amTransportGulp({uglify:true}))
+		.pipe(amTransportGulp({uglify: true, family: "AW"}))
 		.pipe(gulp.dest('./dist/'));
 });
 

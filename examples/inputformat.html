@@ -1,17 +1,30 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>ttt</title>
-<style type="text/css">
-input {width:240px; height:24px; margin:10px 0; width:500px;}
-button {padding:10px;}
-</style>
-<script type="text/javascript" src="inputformat.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="http://static.alipayobjects.com/amui/base/1.0.1/amui-https.css"
+          media="all">
+    <style type="text/css">
+        input {
+            height: 24px;
+            margin: 10px 0;
+            width: 500px;
+        }
+
+        button {
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="../src/gallery/format/inputformat.js"></script>
 </head>
 <body>
 
-<input type="text" data-format="4 " value="abcdefghijkmln" />
-
+格式化"4个字符中一个空格"<input type="text" data-format="4 " value="abcdefghijkmln"/>
 </body>
 </html>
