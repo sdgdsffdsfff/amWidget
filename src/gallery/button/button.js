@@ -302,4 +302,6 @@ function type(obj) {
 	return Object.prototype.toString.call(obj).replace(/\[object (\w+)\]/, '$1').toLowerCase();
 }
 
+var button = aliButton;
+
 module.exports = button;
