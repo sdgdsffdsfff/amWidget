@@ -23,7 +23,7 @@ toast({
 
 ### 配置项
 
-#### message `String` 
+#### message `String` 默认 ''
   
   * 提示文案
 
@@ -34,6 +34,14 @@ toast({
   * 'error' 会显示失败图标（八叉）
   * 'xxx'： 任意名称，需要自己定义图标对应的class属性。例如：am-icon-xxx
 
+#### hideDelay `String` 默认 '2500'
+
+  * '2500' : 延时隐藏toast，毫秒
+
+#### callContainer `Boolean` 默认 'true'
+
+  * true : 开启容器方法
+  * false : 关闭容器方法
 
 ### 方法
 
