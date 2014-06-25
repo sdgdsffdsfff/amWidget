@@ -124,7 +124,7 @@ Button.prototype.autoDisabled = false;
  */
 function bindTap(button) {
 	button.ele.style['-webkit-user-select'] = 'none';
-	bind(button.ele, 'touchend', function () {
+	bind(button.ele, 'touchend touchmove', function () {
 		var t = this;
 		var ctmClass = t.getAttribute('data-active-class') || "active";
 		t.classList.remove(ctmClass);
@@ -247,7 +247,10 @@ function findInStorage(ele) {
 }
 
 function bind(el, event, fn, useCapture) {
-	el.addEventListener(event, fn, !!useCapture);
+	var evs = 'string' === type(event) ? event.split(' ') : [];
+	each(evs, function (i, e) {
+		el.addEventListener(e, fn, !!useCapture);
+	});
 }
 
 function unBind(el, event, fn, useCapture) {
