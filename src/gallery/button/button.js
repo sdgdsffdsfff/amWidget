@@ -124,7 +124,8 @@ Button.prototype.autoDisabled = false;
  */
 function bindTap(button) {
 	button.ele.style['-webkit-user-select'] = 'none';
-	bind(button.ele, 'touchend touchmove', function () {
+	bind(button.ele, 'touchend touchmove touchcancel', function () {
+		console.log("touch");
 		var t = this;
 		var ctmClass = t.getAttribute('data-active-class') || "active";
 		t.classList.remove(ctmClass);
