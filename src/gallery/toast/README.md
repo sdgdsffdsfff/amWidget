@@ -88,7 +88,7 @@ toast.show();
 toast.hide();
 ```
 
-#### oast.options.setHTML() 设置toast HTML
+#### toast.options.setHTML() 设置toast HTML
 
   * <%toast-type%> : 提示类型
   * <%toast-message%> : 提示信息
@@ -99,7 +99,7 @@ toast.options.setHTML('HTML模版必须有 <%toast-type%>和<%toast-message%>');
 
 > 注意：使用此方法会替换原有toast HTML模版。
 
-#### oast.options.setCSS() 设置toast CSS
+#### toast.options.setCSS() 设置toast CSS
   
 ```javascript
 toast.options.setCSS('.am-toast{position:fixed;z-index:100;top:45%;');
