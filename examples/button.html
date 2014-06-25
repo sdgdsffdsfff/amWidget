@@ -13,15 +13,19 @@
           media="all">
     <link rel="stylesheet" href="test.css"/>
     <style type="text/css">
-		.buttons{
-			overflow: hidden;
-		}
-		.buttons li{
-			/*width: 50%;*/
-			/*float: left;*/
-		}
+        .buttons {
+            overflow: hidden;
+        }
+
+        .buttons li {
+            /*width: 50%;*/
+            /*float: left;*/
+
+        }
+
         .buttons button {
             margin: 10px;
+            border-radius: 3px;
         }
 
         .hover {
@@ -36,11 +40,16 @@
             color: #000000;
             background: #ffffff;
         }
+
+        .new_btn {
+            background: #cccccc;
+        }
     </style>
     <script src="zepto.js"></script>
     <script type="text/javascript" src="../dist/gallery/button/button.js"></script>
 </head>
 <body>
+<h3>按钮列表</h3>
 <ul class="buttons">
     <li>
         <a data-active-class="hover" href="javascript:;">测试按钮</a>
@@ -88,8 +97,32 @@
         <a data-active-class="hover" href="javascript:;">测试按钮</a>
     </li>
 </ul>
-<script type="text/javascript">
 
+<h5>动态增加按钮</h5>
+<a href="javascript:;" class="am-button" id="add_btn">增加按钮</a>
+
+<h5>初始化新建按钮</h5>
+<a href="javascript:;" class="am-button" id="init_btn">初始化按钮</a>
+
+<script type="text/javascript">
+    $("#add_btn").bind("click", function () {
+        $('.buttons').append('<li><a data-active-class="hover" class="new_btn" href="javascript:;">测试按钮</a></li>');
+    });
+
+    $("#init_btn").bind("click", function () {
+        var btn = new AW.button(".new_btn");
+        btn.tap(function () {
+                    console.log("clicked");
+                    var count = $(this).data("count");
+                    count = count === undefined ? 0 : parseInt(count);
+                    $(this).data("count", ++count);
+                    $(this).html("测试按钮 " + count + "次");
+                },
+                1000,
+                true
+        );
+        $(".new_btn").removeClass('new_btn');
+    });
 </script>
 </body>
 </html>

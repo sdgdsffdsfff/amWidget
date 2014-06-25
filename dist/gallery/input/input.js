@@ -1,1 +1,276 @@
-window.AW=window.AW||{},function(){"use strict";function t(t,e){function n(t){var e,n,i=0,o=t.length,r=[],u=0;for(""===l[0]&&(u=1,r.push(a[0])),n=0;s>n;n++)if(l[n]){if(e=+l[n]+i,r.push(t.slice(i,e)),e>o)break;r.push(a[n+u]),i=e}return r.join("")}var i=[];if(!e)return t;var l=e.split(/[^\d]+/g),a=e.split(/\d+/g),s=l.length;""===a[0]&&a.shift(),""===a[a.length-1]&&a.pop();var o=new RegExp("(\\"+a.join("|\\")+")","g");t=t.replace(o,"");var r,u=t.length,c=l.reduce(function(t,e){return+t+ +e}),h=Math.ceil(u/c),d=0;for(r=0;h>r;r++)i.push(n(t.slice(d,d+c))),d+=c;return i.join("")}function e(e){e.addEventListener("input",function(){var e=this.getAttribute("data-format"),n=(this.getAttribute("coord"),this.value),i=t(n,e),a=this.getAttribute("oldval")||"",s=this.selectionStart,o=0;l.indexOf("linux; u")>-1&&i.length>a.length&&s++,l.indexOf("iphone os 6")>-1&&0==s&&s++,i===a&&" "===i.slice(s,s+1)?(n=n.slice(0,s-1>=0?s-1:0)+n.slice(s),i=t(n,e),o=1):" "===i.slice(s-1,s)&&(i.length>a.length?o=-1:i.length<a.length&&(o=1)),this.value=i;var r,u=this;r=l.indexOf("iphone os 6")>-1?function(){var t,e=0;u.selectionEnd+1>=i.length?e=Math.abs(a.length-i.length):(t=i.slice(s).length-a.slice(s).length)>0?(o=0,o=" "===i.slice(s,s+1)?-1:0,e=1):e=Math.abs(a.slice(0,s).length-i.slice(0,s).length),i.replace(/\s/g,"")===a.slice(1).replace(/\s/g,"")&&(o=1),u.selectionStart=s+e-o,u.selectionEnd=u.selectionStart}:function(){u.selectionStart=s+Math.abs(a.slice(0,s).length-i.slice(0,s).length)-o,u.selectionEnd=u.selectionStart},l.indexOf("linux; u")>-1||l.indexOf("iphone os 6")>-1?setTimeout(function(){r()},0):r(),this.setAttribute("oldval",this.value)},!1)}function n(e){e.addEventListener("input",function(){var e=this.value,n=this.getAttribute("data-format");this.value=t(e,n)})}var i={},l=navigator.userAgent.toLowerCase();i.listen=function(i){i&&!i.length&&(i=[i]),i=i||document.querySelectorAll("input[data-format]"),[].forEach.call(i,function(i){i[0]&&i[0].addEventListener&&(i=i[0]),i._InputFormatBinded||(i.value&&(i.value=t(i.value,i.getAttribute("data-format"))),i._customKeyboard?n(i):e(i),i._InputFormatBinded=!0)})},"complete"===document.readyState?i.listen():document.addEventListener("DOMContentLoaded",function(){i.listen()},!1);var a=i;window.AW.input=a}();
+window.AW = window.AW||{};
+(function(){
+/**
+ * @namespace   AW
+ * @author      途皖 <xiaochen.lxc@alibaba-inc.com>
+ * @version     1.0.0
+ * @date        2014-05-27
+ */
+
+/**
+ * @namespace
+ *
+ * @memberof    AW
+ * @name        AW.InputFormat
+ */
+
+'use strict';
+
+var kbc = {},
+	ua = navigator.userAgent.toLowerCase();
+
+/**
+ * @desc        格式化内容
+ * @access      private
+ * @param       {string}    val         需要格式化的值
+ * @param       {string}    [rule]      格式化值需要用的规则
+ * @returns     {string}    根据规则格式化后的值
+ *
+ * @memberof    AW.InputFormat
+ *
+ * @example
+ * formatVal('abcdefghijkmln', '4 ');
+ * // returns 'abcd efgh ijkm ln'
+ */
+function formatVal(val, rule) {
+	var result = [];
+
+	if (!rule) {
+		return val;
+	}
+
+	var // 字符长度集合
+		lenLimitUnit = rule.split(/[^\d]+/g),
+	// 分隔符集合
+		delimUnit = rule.split(/\d+/g),
+		limitLen = lenLimitUnit.length;
+
+	if (delimUnit[0] === '') {
+		delimUnit.shift();
+	}
+	if (delimUnit[delimUnit.length - 1] === '') {
+		delimUnit.pop();
+	}
+
+	// 在字符串中将分割符过滤掉
+	var delimPattern = new RegExp('(\\' + delimUnit.join('|\\') + ')', 'g');
+	val = val.replace(delimPattern, '');
+
+	var valLen = val.length,
+		fullLen = lenLimitUnit.reduce(function (a, b) {
+			return (+a) + (+b);
+		}),
+		loopLen = Math.ceil(valLen / fullLen);
+
+	/**
+	 * @desc        将指定的字符片段格式化
+	 * @access      private
+	 *
+	 * @memberof    formatVal
+	 */
+	function getPartFormat(v) {
+		var start = 0, end,
+			vlen = v.length,
+			vArr = [],
+			offset = 0,
+			i;
+
+		// 分隔符在前，特殊处理
+		if (lenLimitUnit[0] === '') {
+			offset = 1;
+			vArr.push(delimUnit[0]);
+		}
+
+		// 根据长度单元获取字符
+		for (i = 0; i < limitLen; i++) {
+			if (!lenLimitUnit[i]) {
+				continue;
+			}
+
+			end = +lenLimitUnit[i] + start;
+
+			// 汇总根据长度分割出的字符片段
+			vArr.push(v.slice(start, end));
+
+			// 检测是否在整个字符末尾
+			if (end > vlen) {
+				break;
+			}
+
+			// 加入分隔符
+			vArr.push(delimUnit[i + offset]);
+
+			start = end;
+		}
+
+		return vArr.join('');
+	}
+
+	// 格式化所有字符
+	var posMark = 0, j;
+	for (j = 0; j < loopLen; j++) {
+		result.push(getPartFormat(val.slice(posMark, posMark + fullLen)));
+		posMark = posMark + fullLen;
+	}
+
+	return result.join('');
+}
+
+/**
+ * @desc        基于文本框的输入监听
+ * @access      private
+ * @param       {HTMLInputElement}  ele     要监听的文本框元素
+ *
+ * @memberof    AW.InputFormat
+ */
+function bindInputEvent(ele) {
+	ele.addEventListener('input', function (e) {
+		var formatRules = this.getAttribute('data-format'),
+			coord = this.getAttribute('coord'),
+			val = this.value,
+			fmtVal = formatVal(val, formatRules),
+			oldVal = this.getAttribute('oldval') || '',
+			selStart = this.selectionStart,
+			offset = 0;
+
+		// 修正部分android机光标获取错误问题
+		if (ua.indexOf('linux; u') > -1 && fmtVal.length > oldVal.length) {
+			selStart++
+		}
+
+		if (ua.indexOf('iphone os 6') > -1 && selStart == 0) {
+			selStart++;
+		}
+
+		// 设置光标偏移量与内容
+		if (fmtVal === oldVal && fmtVal.slice(selStart, selStart + 1) === ' ') {
+			val = val.slice(0, ((selStart - 1) >= 0 ? selStart - 1 : 0)) + val.slice(selStart);
+			fmtVal = formatVal(val, formatRules);
+			offset = 1;
+		} else if (fmtVal.slice(selStart - 1, selStart) === ' ') {
+			if (fmtVal.length > oldVal.length) {
+				offset = -1;
+			} else if (fmtVal.length < oldVal.length) {
+				offset = 1;
+			}
+		}
+
+		this.value = fmtVal;
+
+		var inp = this,
+			setPos;
+
+		if (ua.indexOf('iphone os 6') > -1) {
+			// 设置光标位置
+			setPos = function () {
+				var strLen = 0, temp;
+				if (inp.selectionEnd + 1 >= fmtVal.length) {
+					strLen = Math.abs(oldVal.length - fmtVal.length);
+				} else if ((temp = fmtVal.slice(selStart).length - oldVal.slice(selStart).length) > 0) {
+					offset = 0;
+					if (fmtVal.slice(selStart, selStart + 1) === ' ') {
+						offset = -1;
+					} else {
+						offset = 0;
+					}
+					strLen = 1;
+				} else {
+					strLen = Math.abs(oldVal.slice(0, selStart).length - fmtVal.slice(0, selStart).length);
+				}
+
+				if (fmtVal.replace(/\s/g, '') === oldVal.slice(1).replace(/\s/g, '')) {
+					offset = 1;
+				}
+
+				inp.selectionStart = selStart + strLen - offset;
+				inp.selectionEnd = inp.selectionStart;
+			};
+		} else {
+			// 设置光标位置
+			setPos = function () {
+				inp.selectionStart = selStart + Math.abs(oldVal.slice(0, selStart).length - fmtVal.slice(0, selStart).length) - offset;
+				inp.selectionEnd = inp.selectionStart;
+			}
+		}
+
+		if (ua.indexOf('linux; u') > -1 || ua.indexOf('iphone os 6') > -1) {
+			// 延迟设置光标位置，用于修正填充导致的问题
+			setTimeout(function () {
+				setPos();
+			}, 0);
+		} else {
+			setPos();
+		}
+
+		this.setAttribute('oldval', this.value);
+	}, false);
+}
+
+/**
+ * @desc        基于文本框的输入监听
+ * @access      private
+ * @param       {HTMLInputElement}  ele     要监听的文本框元素
+ *
+ * @memberof    AW.InputFormat
+ */
+function bindKbEvent(ele) {
+	// 绑定监听事件，便于虚拟键盘动态触发
+	ele.addEventListener('input', function (e) {
+		var val = this.value,
+			rule = this.getAttribute('data-format');
+
+		this.value = formatVal(val, rule);
+	});
+}
+
+/**
+ * @desc        输入事件监听
+ * @param       {HTMLInputElement[]}    list    要监听的文本框元素
+ * @name        AW.InputFormat.listen
+ */
+kbc.listen = function (list) {
+	if (list && !list.length) {
+		list = [list];
+	}
+
+	// 元素获取
+	list = list || document.querySelectorAll('input[data-format]');
+
+	[].forEach.call(list, function (ele, idx) {
+		// jQuery 元素容错
+		if (ele[0] && ele[0].addEventListener) {
+			ele = ele[0];
+		}
+
+		// 防重复绑定
+		if (ele._InputFormatBinded) {
+			return;
+		}
+
+		// 格式化初始值
+		if (ele.value) {
+			ele.value = formatVal(ele.value, ele.getAttribute('data-format'));
+		}
+
+		if (ele._customKeyboard) {
+			bindKbEvent(ele);
+		} else {
+			bindInputEvent(ele);
+		}
+
+		ele._InputFormatBinded = true;
+	});
+};
+
+// 文档初始化完成后监听
+if (document.readyState === 'complete') {
+	kbc.listen();
+} else {
+	document.addEventListener('DOMContentLoaded', function (e) {
+		kbc.listen();
+	}, false);
+}
+var input = kbc;
+window.AW.input = input;
+
+})();
