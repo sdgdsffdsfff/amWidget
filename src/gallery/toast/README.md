@@ -86,7 +86,7 @@ toast.hide();
   * <%toast-message%> : 提示信息
   
 ```javascript
-toast.options.setHTML('HTML模版<%toast-type%>和<%toast-message%>必须有');
+toast.options.setHTML('HTML模版必须有 <%toast-type%>和<%toast-message%>');
 ```
 
 > 注意：使用此方法会替换原有toast HTML模版。
