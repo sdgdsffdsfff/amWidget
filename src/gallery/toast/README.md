@@ -11,7 +11,7 @@ toast提示
 可以自定义提示文案（message），设置提示类型（success、error），延迟消失时间（hideDelay），是否开启容器方式调用（callContainer）。
 
 ```javascript
-toast({
+toast.show({
     message: '认证成功',
     type: 'success',
     hideDelay: '2500',
@@ -45,41 +45,23 @@ toast({
 
 ### 方法
 
-#### toast() 展示toast
+#### toast.show() 显示toast
 
-一种简单的调用方式：
+简单调用：
 
 ```javascript
-toast('认证成功');
+toast.show('认证成功');
 ```
 
 或者完整参数调用：
 
 ```javascript
-toast({
+toast.show({
     message: '认证成功',
     type: 'success',
     hideDelay: '2500',
     callContainer: true
 });
-```
-
-#### toast.success() 展示成功类型的toast
-
-```javascript
-toast.success('认证成功');
-```
-
-#### toast.error() 展示失败类型的toast
-
-```javascript
-toast.error('付款失败');
-```
-
-#### toast.show() 显示toast
-
-```javascript
-toast.show();
 ```
 
 #### toast.hide() 隐藏toast
@@ -88,7 +70,7 @@ toast.show();
 toast.hide();
 ```
 
-#### toast.options.setHTML() 设置toast HTML
+#### oast.options.setHTML() 设置toast HTML
 
   * <%toast-type%> : 提示类型
   * <%toast-message%> : 提示信息
@@ -99,7 +81,7 @@ toast.options.setHTML('HTML模版必须有 <%toast-type%>和<%toast-message%>');
 
 > 注意：使用此方法会替换原有toast HTML模版。
 
-#### toast.options.setCSS() 设置toast CSS
+#### oast.options.setCSS() 设置toast CSS
   
 ```javascript
 toast.options.setCSS('.am-toast{position:fixed;z-index:100;top:45%;');
