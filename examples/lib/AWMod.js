@@ -1,5 +1,4 @@
 (function () {
-	//todo 参考combo连接符号
 	var MOD_NAMESPACE = "AW";
 	eval("window." + MOD_NAMESPACE + " = window." + MOD_NAMESPACE + " || {}");
 
@@ -23,7 +22,7 @@
 		for (var i = 0; i < scripts.length; i++) {
 			var script = scripts[i];
 			if (script.src && script.src.indexOf(MOD_NAMESPACE + "Mod") > 0) {
-				mods = script.src.substr(script.src.indexOf("?") + 1, script.src.length).split(",");
+				mods = script.src.substr(script.src.indexOf("?") + 1, script.src.length).split("??");
 			}
 		}
 		return mods;

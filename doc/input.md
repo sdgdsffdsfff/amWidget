@@ -7,13 +7,13 @@
 ### 示例代码
 html
 ```
-	<input type="text" data-format="4 "/>		input内容自动每4个分为1组		
+	<input type="text" data-format="4,"/>		input内容自动每4个分为1组,分隔符为逗号
 ```
 
 js
 ```
 	var list = document.getElementsByTagName("input");	//获取输入框元素集
-	kbc.listen(list);					//list为要监听的元素以数组形式的集合
+	AJ.input.listen(list);					//list为要监听的元素以数组形式的集合
 ```
 
 
@@ -22,7 +22,7 @@ js
 ```
 	/**
 	 * @desc        输入事件监听
-	 * @param       {HTMLInputElement[]}    list    要监听的文本框元素
+	 * @param       {HTMLInputElement[]}    list    要监听的文本框元素 NodeList
 	 * @name        AW.InputFormat.listen
 	 */
 	kbc.listen = function (list)
