@@ -1,12 +1,14 @@
 /**
  *
- * AW toast
+ * AW.toast
  * @namespace AW
  * @author 叶清 <yeqing@alipay.com>
  * @version 1.0.0
- * @example toast('您的资金已经成功转入！');
+ * @example toast.show('您的资金已经成功转入！');
  *
  * */
+
+'use strict';
 
 var _toastSetup = {
     /**
@@ -127,7 +129,9 @@ var _toastSetup = {
     callContainer : function () {
         if (toast.options.type === 'success' || toast.options.type === 'error') {
             //fix 容器参数不
-            if (toast.options.type === 'error') { toast.options.type = 'fail'; }
+            if (toast.options.type === 'error') {
+                toast.options.type = 'fail';
+            }
             //执行容器toast
             this.callBridge.call('toast', {
                 content: toast.options.message,
