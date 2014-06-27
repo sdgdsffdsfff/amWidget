@@ -5,78 +5,44 @@
 ### 示例代码
 js
 ```
-	/**
-	 * 默认配置参数
-	 *
-	 * @memberof AW.loading
-	 * @param {!Object} target - className，node对象
-	 * @param {!String} message - 默认文案
-	 * @param {String} type - 类型（success | error | loading）
-	 * @param {Number} hideDelay - 延迟隐藏时间（毫秒）
-	 * @param {Number} showDelay - 延迟显示时间（毫秒）
-	 * @param {String} animate - 动画效果
-	 * @param {Boolean} isWebview - 是否开启容器调用（开启后不在容器则不调用）
-	 *
-	 * @desc 默认配置参数
-	 *
-	 */
-	 
-	var opt = {
-		target: '.J-am-toast',					//className
-		message: '这里是默认文案，请添加',		//默认文案
-		type: 'none',							//类型名
-		hideDelay: '2500',						//延迟隐藏
-		showDelay: '0',							//延迟显示
-		animate: 'none',						//动画效果
-		isWebview: true							//是否开启容器调用
-	}
-	
-	toast(opt);	//开启窗口
+//简单调用：
+toast.show('认证成功');
+//完整参数调用：
+toast.show({
+    message: '认证成功',
+    type: 'success',
+    hideDelay: '2500',
+    callContainer: true
+});
+toast.hide(); //隐藏
 ```
-
 
 ### 接口列表
+#### toast.show(message|options) 显示toast
+`message`
+需要显示的消息
 
-```
-	/**
-	 * 显示toast
-	 *
-	 * @memberof AW.loading
-	 *
-	 * @desc 外部调用
-	 *
-	 */
-	show: function (callback)
-	
-	/**
-	 * 隐藏toast
-	 *
-	 * @memberof AW.loading
-	 *
-	 * @desc 外部调用
-	 *
-	 */
-	hide: function ()
-	
-	/**
-	 * 确认按钮的回调函数
-	 *
-	 * @memberof AW.loading
-	 *
-	 * @type {Function}
-	 */
-	success: function ()
-	
-	/**
-	 * 取消按钮的回调函数
-	 *
-	 * @memberof AW.loading
-	 *
-	 * @type {Function}
-	 */
-	cancel: function ()
-	
-```
+`options`
+#### message `String` 默认 ''
 
+  * 提示文案
 
-### 演示 可选
+#### type `String` 默认 'none'
+
+  * 'none' : 不显示图标
+  * 'success' 会显示成功图标（对钩）
+  * 'error' 会显示失败图标（八叉）
+  * 'xxx'： 任意名称，需要自己定义图标对应的class属性。例如：am-icon-xxx
+
+#### showDelay `String` 默认 '2500'
+
+  * '2500' : 延时显示toast，毫秒
+
+#### callContainer `Boolean` 默认 'true'
+
+  * true : 开启容器方法
+  * false : 关闭容器方法
+
+#### toast.hide() 隐藏toast
+
+### 演示

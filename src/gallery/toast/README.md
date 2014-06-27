@@ -49,13 +49,13 @@ toast.show({
 
 简单调用：
 
-```javascript
+```
 toast.show('认证成功');
 ```
 
 或者完整参数调用：
 
-```javascript
+```
 toast.show({
     message: '认证成功',
     type: 'success',
@@ -66,24 +66,6 @@ toast.show({
 
 #### toast.hide() 隐藏toast
 
-```javascript
+```
 toast.hide();
 ```
-
-#### oast.options.setHTML() 设置toast HTML
-
-  * <%toast-type%> : 提示类型
-  * <%toast-message%> : 提示信息
-  
-```javascript
-toast.options.setHTML('HTML模版必须有 <%toast-type%>和<%toast-message%>');
-```
-
-> 注意：使用此方法会替换原有toast HTML模版。
-
-#### oast.options.setCSS() 设置toast CSS
-  
-```javascript
-toast.options.setCSS('.am-toast{position:fixed;z-index:100;top:45%;');
-```
-> 注意：使用此方法会替换原有toast CSS。

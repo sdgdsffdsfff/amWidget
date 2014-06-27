@@ -102,6 +102,7 @@ var _toastSetup = {
     /**
      * @description 延时隐藏toast
      *
+	 * //todo 应该是 延迟显示的含义
      */
     hideDelay : function() {
         var that = this;
