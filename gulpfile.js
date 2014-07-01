@@ -8,11 +8,11 @@ gulp.task('am-transport', function () {
 	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./dist/'))
-		.pipe(gulp.dest('./examples/lib'))
+		.pipe(gulp.dest('./examples/lib/gallery/'))
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./dist/'))
-		.pipe(gulp.dest('./examples/lib'));
+		.pipe(gulp.dest('./examples/lib/gallery/'));
 });
 
 gulp.task('doc', function () {
