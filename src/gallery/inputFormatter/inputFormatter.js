@@ -10,7 +10,7 @@
  * @namespace
  *
  * @memberof    AW
- * @name        AW.InputFormat
+ * @name        AW.InputFormatter
  */
 
 'use strict';
@@ -25,7 +25,7 @@ var kbc = {},
  * @param       {string}    [rule]      格式化值需要用的规则
  * @returns     {string}    根据规则格式化后的值
  *
- * @memberof    AW.InputFormat
+ * @memberof    AW.InputFormatter
  *
  * @example
  * formatVal('abcdefghijkmln', '4 ');
@@ -123,7 +123,7 @@ function formatVal(val, rule) {
  * @memberof    AW.InputFormat
  */
 function bindInputEvent(ele) {
-	ele.addEventListener('input', function (e) {
+	ele.addEventListener('inputFormatter', function (e) {
 		var formatRules = this.getAttribute('data-format'),
 			coord = this.getAttribute('coord'),
 			val = this.value,
@@ -214,7 +214,7 @@ function bindInputEvent(ele) {
  */
 function bindKbEvent(ele) {
 	// 绑定监听事件，便于虚拟键盘动态触发
-	ele.addEventListener('input', function (e) {
+	ele.addEventListener('inputFormatter', function (e) {
 		var val = this.value,
 			rule = this.getAttribute('data-format');
 
