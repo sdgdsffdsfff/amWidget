@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify');
 
 gulp.task('am-transport', function () {
-	gulp.src('./src/**/*.js')
+	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./dist/'))
 		.pipe(gulp.dest('./examples/lib'))
