@@ -8,9 +8,11 @@ gulp.task('am-transport', function () {
 	gulp.src('./src/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./dist/'))
+		.pipe(gulp.dest('./examples/lib'))
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('./dist/'));
+		.pipe(gulp.dest('./dist/'))
+		.pipe(gulp.dest('./examples/lib'));
 });
 
 gulp.task('doc', function () {
