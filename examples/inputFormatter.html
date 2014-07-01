@@ -23,7 +23,7 @@
         }
     </style>
     <script src="lib/zepto.js"></script>
-    <script type="text/javascript" src="../dist/gallery/input/input.js"></script>
+    <script type="text/javascript" src="../dist/gallery/inputFormatter/inputFormatter.js"></script>
 </head>
 <body>
 4个字符中一个空格<input type="text" data-format="4 " value="abcdefghijkmln"/><br/>
@@ -35,7 +35,7 @@
         $(document.body).append('<input type="text" value="fdasfa" data-format="3#" class="test"/><button class="addFormat">增加input功能</button>');
     }, 200);
 
-    var input = window.AW.input;
+    var inputFormatter = window.AW.inputFormatter;
     $(".addFormat").live("click", function () {
         inputFormatter.listen(document.querySelectorAll(".test"));
     });

@@ -125,7 +125,7 @@ function formatVal(val, rule) {
  * @memberof    AW.InputFormat
  */
 function bindInputEvent(ele) {
-	ele.addEventListener('inputFormatter', function (e) {
+	ele.addEventListener('input', function (e) {
 		var formatRules = this.getAttribute('data-format'),
 			coord = this.getAttribute('coord'),
 			val = this.value,
@@ -271,8 +271,8 @@ if (document.readyState === 'complete') {
 		kbc.listen();
 	}, false);
 }
-var input = kbc;
+var inputFormatter = kbc;
 
-window.AW.input = input;
+window.AW.inputFormatter = inputFormatter;
 
 })();
