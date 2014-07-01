@@ -27,7 +27,7 @@ js
 	 * 初始化方法
 	 *
 	 * @memberof AW.lazyload
-	 * @param {!Object} options - 配置参数
+	 * @param {?Object} options - 配置参数
 	 *
 	 * @desc 初始化方法(可供外部调用)
 	 *
@@ -38,22 +38,10 @@ js
 	init: function (options)
 	
 	/**
-	 * 对资源池添加懒加载监听，仅运行一次
-	 *
-	 * @memberof AW.lazyload
-	 *
-	 * @desc 对资源池添加懒加载监听，仅运行一次(可供外部调用)
-	 *
-	 * @example
-	 * AW.lazyload.run();
-	 */
-	run: function ()
-	
-	/**
 	 * 添加新的图片
 	 *
 	 * @memberof AW.lazyload
-	 * @param {?String|?Object} addStack - 可以为选择器，可以为节点数据集，可以为节点
+	 * @param {?String|Object} addStack - 可以为选择器，可以为节点数据集，可以为节点
 	 *
 	 * @desc 添加新的图片(可供外部调用)
 	 *
@@ -67,8 +55,8 @@ js
 	 * AW.lazyload.add(ZeptoObject);//Zepto节点集（伪数组）
 	 *
 	 */
-	add: function (addStack)
+	load: function (addStack)
 	
 ```
 
-### 演示 可选
+### Demo
