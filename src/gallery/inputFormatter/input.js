@@ -1,5 +1,6 @@
 /**
  * @namespace   AW
+ *
  * @author      途皖 <xiaochen.lxc@alibaba-inc.com>
  * @version     1.0.0
  * @date        2014-05-27

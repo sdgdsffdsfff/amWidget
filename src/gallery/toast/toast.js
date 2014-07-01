@@ -2,6 +2,7 @@
  *
  * AW.toast
  * @namespace AW
+ *
  * @author 叶清 <yeqing@alipay.com>
  * @version 1.0.0
  * @example toast.show('您的资金已经成功转入！');

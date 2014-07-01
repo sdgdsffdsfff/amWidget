@@ -16,7 +16,7 @@ js
 	}
 	AW.lazyload.init(opt);			//执行lazyload
 	
-	AW.lazyload.add(obj);			//加入新的图片组，obj可以是节点，节点数组，父级元素，jQuery选择字符串等
+	AW.lazyload.load(obj);			//加入新的图片组，obj可以是节点，节点数组，父级元素，jQuery选择字符串等
 ```
 
 

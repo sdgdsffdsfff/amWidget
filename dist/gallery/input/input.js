@@ -2,6 +2,7 @@ window.AW = window.AW||{};
 (function(){
 /**
  * @namespace   AW
+ *
  * @author      途皖 <xiaochen.lxc@alibaba-inc.com>
  * @version     1.0.0
  * @date        2014-05-27
@@ -271,6 +272,7 @@ if (document.readyState === 'complete') {
 	}, false);
 }
 var input = kbc;
+
 window.AW.input = input;
 
 })();

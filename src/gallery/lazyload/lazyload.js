@@ -1,20 +1,14 @@
 /**
  *
- * AW widget
+ * AW lazyload 图片懒加载
  * @namespace AW
+ *
  * @author 雷骏 <leijun.wulj@alipay.com>
  * @version 1.0.0
  *
  * */
 
 'use strict';
-/**
- *
- * @namespace
- *
- * @memberof AW
- * */
-
 var lazyload = {
     /**
      * 默认配置参数
