@@ -1,10 +1,10 @@
 /**
  *
- * AW.toast
+ * AW.loading
  * @namespace AW
  * @author 叶清 <yeqing@alipay.com>
  * @version 1.0.0
- * @example toast.show('您的资金已经成功转入！');
+ * @example loading.show('加载中，请稍后');
  *
  * */
 
@@ -233,18 +233,18 @@ toast.options = {
  *
  * @memberof    AW
  */
-toast.show = function (options) {
+loading.show = function (options) {
     //对象 参数覆盖
     if (typeof(options) === 'object') {
         for (var p in options) {
             this.options[p] = options[p];
         }
-        _toastSetup.init();
+        _loadingSetup.init();
     }
     //字符串 直接替换message
     else if (typeof(options) === 'string') {
         this.options.message = options;
-        _toastSetup.init();
+        _loadingSetup.init();
     }
 }
 /**
@@ -253,8 +253,8 @@ toast.show = function (options) {
  *
  * @memberof    AW
  */
-toast.hide = function (message) {
-    _toastSetup.hide();
+loading.hide = function (message) {
+    _loadingSetup.hide();
 }
 
 /**
@@ -284,4 +284,4 @@ _toastSetup.HTMLText = function() {
     return htmltext;
 }
 
-module.exports = toast;
+module.exports = loading;
