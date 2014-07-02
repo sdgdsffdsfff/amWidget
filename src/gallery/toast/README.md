@@ -8,15 +8,10 @@ toast提示
 
 ## Usage
 
-可以自定义提示文案（message），设置提示类型（success、error），延迟消失时间（hideDelay），是否开启容器方式调用（callContainer）。
+可以自定义提示文案（message），设置提示类型（none、success、error），延迟消失时间（hideDelay），是否开启容器方式调用（callContainer）。
 
 ```javascript
-toast.show({
-    message: '认证成功',
-    type: 'success',
-    hideDelay: '2500',
-    callContainer: true
-});
+AW.toast.show('认证成功');
 ```
 
 ## Api
@@ -49,14 +44,14 @@ toast.show({
 
 简单调用：
 
-```
-toast.show('认证成功');
+```javascript
+AW.toast.show('认证成功');
 ```
 
 或者完整参数调用：
 
-```
-toast.show({
+```javascript
+AW.toast.show({
     message: '认证成功',
     type: 'success',
     hideDelay: '2500',
@@ -66,6 +61,6 @@ toast.show({
 
 #### toast.hide() 隐藏toast
 
-```
-toast.hide();
+```javascript
+AW.toast.hide();
 ```

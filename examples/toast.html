@@ -8,7 +8,7 @@
     <meta name="format-detection" content="telephone=no,email=no"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/anima/dpl/1.1.0/amui.css" media="all">
-    <script charset="utf-8" src="lib/gallery/toast/toast.js"></script>
+    <script charset="utf-8" src="lib/AWMod.js?../src/gallery/toast/toast.js"></script>
 </head>
 <body>
 <div class="am-header">
@@ -19,7 +19,7 @@
         <div class="am-list-item am-list-item-form">
             <div class="am-list-label">message:</div>
             <div class="am-list-control">
-                <input type="text" id="message" placeholder="支付成功" value="支付成功">
+                <input type="text" id="message" placeholder="请填写message" value="支付成功">
             </div>
         </div>
         <div class="am-list-item am-list-item-form">
@@ -74,12 +74,9 @@ AW.toast.show({
     callContainer: true
 });
 AW.toast.hide();
-AW.toast.options.HTML = 'HTML模版<%toast-type%>和<%toast-message%>必须有';
-AW.toast.options.CSS = 'CSS文本';
 </pre>
 </div>
 <script type="text/javascript">
-    toast = AW.toast;
     document.querySelector('.J-toast-show').addEventListener("click", function (ele) {
         AW.toast.show({
             message: document.querySelector("#message").value,

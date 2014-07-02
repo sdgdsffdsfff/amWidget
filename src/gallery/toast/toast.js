@@ -2,7 +2,6 @@
  *
  * AW.toast
  * @namespace AW
- *
  * @author 叶清 <yeqing@alipay.com>
  * @version 1.0.0
  * @example toast.show('您的资金已经成功转入！');
@@ -11,110 +10,38 @@
 
 'use strict';
 
-var _toastSetup = {
-    /**
-     * @description 初始化
-     *
-     */
-    init : function() {
-        //是否开启容器，是否在容器内，是否有容器方法，是否有权限
-        if(toast.options.callContainer && navigator.userAgent.indexOf('AlipayClient') >= 0){
-            this.callBridge.call('checkJSAPI', {
-                api: 'toast'
-            }, function (result) {
-                if(result.available) {
-                    this.callContainer();
-                }
-            });
-        } else {
-            this.setCSS();
-            this.setHTML();
-            this.show();
-        }
+var ua = navigator.userAgent;
+//var ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_2 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A4449d Safari/9537.53 AlipayClient/8.1.0.0422302';
+
+/**
+ * @description        容器相关
+ *
+ */
+var _alipayContainer = {
+    attr : {
+        /**
+         * @description 是否在容器内
+         *
+         * @returns {Boolean}
+         *
+         */
+        isIn : ua.indexOf('AlipayClient') >= 0,
+        /**
+         * @description 容器版本
+         *
+         * @returns {Number} 8.x
+         *
+         */
+        version : (function() {
+            var version = [].concat(ua.match(/AlipayClient\/([^\s]+)/)||'')[1]||'';
+            if (version != '') {
+                version = parseFloat(version);
+            }
+            return version;
+        })()
     },
     /**
-     * @description 是否第一次设置CSS
-     *
-     */
-    isSetCSS : false,
-    /**
-     * @description 设置CSS
-     *
-     */
-    setCSS : function() {
-        var that = this;
-        if(that.isSetCSS) {
-            document.querySelector("style[data-amwid=toast]").innerHTML = toast.options.CSS;
-        } else {
-            var style = document.createElement('style');
-            style.dataset.amwid = 'toast';
-            style.innerHTML = toast.options.CSS;
-            document.head.appendChild(style);
-            that.isSetCSS = true;
-        };
-    },
-    /**
-     * @description 是否第一次设置HTML
-     *
-     */
-    isSetHTML : false,
-    /**
-     * @description 设置HTML
-     *
-     */
-    setHTML : function() {
-        var HTMLtext = toast.options.HTML.replace('<%toast-type%>', toast.options.type);
-            HTMLtext = HTMLtext.replace('<%toast-message%>', toast.options.message);
-        if(this.isSetHTML) {
-            this.toastDom.innerHTML = HTMLtext;
-        } else {
-            var toastDom = document.createElement('div');
-            toastDom.className = 'am-toast am-toast-hide';
-            toastDom.innerHTML = HTMLtext;
-            this.toastDom = toastDom;
-            document.body.appendChild(toastDom);
-            this.isSetHTML = true;
-        }
-    },
-    /**
-     * @description 显示toast
-     *
-     */
-    show : function() {
-        var that = this;
-        this.hide();
-        that.toastDom.classList.remove('am-toast-hide');
-        that.toastDom.classList.add('am-toast-show');
-        that.hideDelay();
-        return toast;
-    },
-    /**
-     * @description 隐藏toast
-     *
-     */
-    hide : function() {
-        clearTimeout(this.hideDelayTimeout);
-        if(this.toastDom) {
-            this.toastDom.classList.remove('am-toast-show');
-            this.toastDom.classList.add('am-toast-hide');
-        }
-    },
-    hideDelayTimeout : {},
-    /**
-     * @description 延时隐藏toast
-     *
-	 * //todo 应该是 延迟显示的含义
-     */
-    hideDelay : function() {
-        var that = this;
-        if(toast.options.hideDelay != 0){
-            that.hideDelayTimeout = window.setTimeout(function(){
-                that.hide();
-            }, toast.options.hideDelay);
-        }
-    },
-    /**
-     * @description 判断容器
+     * @description 容器api统一调用方法
      *
      */
     callBridge : function () {
@@ -125,12 +52,38 @@ var _toastSetup = {
         }, !1);
     },
     /**
-     * @description 调用容器
+     * @description 检测容器接口是否可用
+     *
+     * @returns {Boolean}
      *
      */
-    callContainer : function () {
+    checkJSAPI : function (apiName) {
+        //异常判断
+        if (typeof(apiName) === 'undefined' || apiName === '') {
+            return false;
+        }
+        //容器版本低于8.1，不支持checkJSAPI方法
+        if (this.attr.version < 8.1) {
+            if (apiName === 'tradePay' || apiName === 'startApp' || apiName === 'titlebar' || apiName === 'toolbar' || apiName === 'loading' || apiName === 'toast' || apiName === 'login' || apiName === 'sendSMS' || apiName === 'contact') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //调用容器checkJSAPI
+        this.callBridge.call('checkJSAPI', {
+            api: apiName
+        }, function (result) {
+            return result.available;
+        });
+    },
+    /**
+     * @description 调用容器方法（toast）
+     *
+     */
+    callApi : function () {
         if (toast.options.type === 'success' || toast.options.type === 'error') {
-            //fix 容器参数不
+            //fix 容器参数不同
             if (toast.options.type === 'error') {
                 toast.options.type = 'fail';
             }
@@ -140,7 +93,109 @@ var _toastSetup = {
                 type: toast.options.type,
                 duration: toast.options.hideDelay
             });
-        };
+        }
+    }
+}
+
+/**
+ * @desc        js
+ * @param       {string|object}    options      调用API参数
+ *
+ * @memberof    AW.toast
+ */
+var _toastSetup = {
+    /**
+     * @description 初始化
+     *
+     */
+    init: function () {
+        //开启容器，在容器内并且容器支持该方法，走容器
+        if(toast.options.callContainer && _alipayContainer.attr.isIn && _alipayContainer.checkJSAPI('toast')) {
+            _alipayContainer.callApi();
+        }
+        //js方法
+        else {
+            this.setCSS().setHTML().show();
+        }
+    },
+    /**
+     * @description 是否第一次设置CSS
+     *
+     */
+    isSetCSS: false,
+    /**
+     * @description 设置CSS
+     *
+     */
+    setCSS: function () {
+        var that = this;
+        if (!that.isSetCSS) {
+            var style = document.createElement('style');
+            style.dataset.amwid = 'toast';
+            style.innerHTML = this.CSSText();
+            document.head.appendChild(style);
+            that.isSetCSS = true;
+        }
+        return this;
+    },
+    /**
+     * @description 是否第一次设置HTML
+     *
+     */
+    isSetHTML: false,
+    /**
+     * @description 设置HTML
+     *
+     */
+    setHTML: function () {
+        var HTMLText = this.HTMLText().replace('<%toast-type%>', toast.options.type);
+        HTMLText = HTMLText.replace('<%toast-message%>', toast.options.message);
+        if (this.isSetHTML) {
+            this.toastDom.innerHTML = HTMLText;
+        } else {
+            var toastDom = document.createElement('div');
+            toastDom.className = 'am-toast am-toast-hide';
+            toastDom.innerHTML = HTMLText;
+            this.toastDom = toastDom;
+            document.body.appendChild(toastDom);
+            this.isSetHTML = true;
+        }
+        return this;
+    },
+    /**
+     * @description 显示toast
+     *
+     */
+    show: function () {
+        var that = this;
+        this.hide();
+        that.toastDom.classList.remove('am-toast-hide');
+        that.toastDom.classList.add('am-toast-show');
+        that.hideDelay();
+    },
+    /**
+     * @description 隐藏toast
+     *
+     */
+    hide: function () {
+        clearTimeout(this.hideDelayTimeout);
+        if (this.toastDom) {
+            this.toastDom.classList.remove('am-toast-show');
+            this.toastDom.classList.add('am-toast-hide');
+        }
+    },
+    hideDelayTimeout: {},
+    /**
+     * @description 延时隐藏toast
+     *
+     */
+    hideDelay: function () {
+        var that = this;
+        if (!isNaN(parseFloat(toast.options.hideDelay)) && parseFloat(toast.options.hideDelay) > 0) {
+            that.hideDelayTimeout = window.setTimeout(function () {
+                that.hide();
+            }, parseFloat(toast.options.hideDelay));
+        }
     }
 }
 
@@ -151,6 +206,7 @@ var _toastSetup = {
  * @memberof    AW.toast
  */
 var toast = {}
+
 /**
  * @description 默认配置参数
  *
@@ -159,48 +215,70 @@ var toast = {}
  * @param {String} hideDelay - 延迟隐藏时间（毫秒）
  * @param {Boolean} callContainer - 是否开启容器native调用
  *
- * @desc 默认配置参数
+ * @memberof    AW.toast
  *
  */
 toast.options = {
     'message': '',
     'type': 'none',
     'hideDelay': '2500',
-    'callContainer': true,
-    'HTML': '<div class="am-toast-text"><span class="am-icon-<%toast-type%>"></span> <%toast-message%></div>',
-    'CSS': '.am-toast{position:fixed;z-index:100;top:45%;width:100%;text-align:center;font-size:16px;font-family:sans-serif;}.am-toast .am-toast-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}.am-toast .am-toast-text .iconfont{font-size:16px;}.am-toast-show{display:block;}.am-toast-hide{display:none;}.am-toast .am-icon-error,.am-toast .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}.am-toast .am-icon-error:before,.am-toast .am-icon-success:before{content:"";display:block;width:100%;height:100%;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAUCAYAAADLP76nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQzM4RDk3M0NEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQzM4RDk3NENEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjJDMzhEOTcxQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJDMzhEOTcyQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wRxj8gAAAclJREFUeNrEl79KxEAQxnPnO9gJhwgWiiDKgeIf0HdI7OysLA4ULxbqNVd4gmBhJVrY6UP4AL6BIIp4WFxQVLSTi9/iHKzrJNnZcHHgl4RkJvt9kOzsluI49ijq4B5cerLwQQW0vP8IZQCE8U98AZ/u2eBTjYq6oE7KAFij869nHg2sh60JXXwvtvogvgRO6f3npgl1WGGEZJnwE2qCPog/McY5A2XdgNREkeKP479xCwZNA7YmihR/xIi/A0PmJ2RroijxikNG/AOocD+xrQmp+Bo4cBDfYsQ/gmEuP+klnAmJ+HXQpdymQHyTGasNRpJq0l4WJJjIEr+qie9Fw0J8gxnrCYym1ZXTepzjs2sQGff2wG5KzQ7l6NEBy+DGphPbTJWSPjEGOkxdyOSGTJ6qHbf57CRNStrsJkDEiNvUcjaY5xHVei4GgpTZJnAwMQmeGZE1wowXqvFcDAQWU6WLiSnwatR0mR9d5UxLp12J+DwmqowJU3zVpelJxecxMQPeGPHvYNa1a3OzgO3ygDORtSeYAx9avrqez7Ps6F1sO65tdBOhZc0C+CQW866bStqWMqQt5YVwUxfQlnJfULNE56u8O8pvAQYAUnCy4ged31IAAAAASUVORK5CYII=") no-repeat;-webkit-background-size:32px auto;}.am-toast .am-icon-error{width:13px;}.am-toast .am-icon-error:before{background-position:0 0;}.am-toast .am-icon-success{width:16px;}.am-toast .am-icon-success:before{background-position:-14px 0;}'
+    'callContainer': true
 }
 /**
- * @desc        显示toast
+ * @description        显示toast
+ * @param {string|object} options
  *
  * @memberof    AW
  */
-toast.show = function (options){
-    if(typeof(options) === 'undefined') {
-        _toastSetup.show();
-    } else {
-        //对象 参数覆盖
-        if(typeof(options) === 'object') {
-            for(var p in options){
-                this.options[p] = options[p];
-            }
+toast.show = function (options) {
+    //对象 参数覆盖
+    if (typeof(options) === 'object') {
+        for (var p in options) {
+            this.options[p] = options[p];
         }
-        //字符串 直接替换message
-        else if(typeof(options) === 'string') {
-            this.options.message = options;
-        }
+        _toastSetup.init();
+    }
+    //字符串 直接替换message
+    else if (typeof(options) === 'string') {
+        this.options.message = options;
         _toastSetup.init();
     }
 }
 /**
- * @desc        隐藏toast
- * @param       {string}    message         提示的文案
+ * @description        隐藏toast
+ * @param              {string}    message         提示的文案
  *
  * @memberof    AW
  */
-toast.hide = function (message){
+toast.hide = function (message) {
     _toastSetup.hide();
 }
 
+/**
+ * @description        CSSText
+ *
+ */
+_toastSetup.CSSText = function () {
+    var csstext = '.am-toast{position:fixed;z-index:100;top:45%;width:100%;text-align:center;font-size:16px;font-family:sans-serif;}' +
+        '.am-toast .am-toast-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
+        '.am-toast .am-toast-text .iconfont{font-size:16px;}' +
+        '.am-toast-show{display:block;}' +
+        '.am-toast-hide{display:none;}' +
+        '.am-toast .am-icon-error,.am-toast .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}' +
+        '.am-toast .am-icon-error:before,.am-toast .am-icon-success:before{content:"";display:block;width:100%;height:100%;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAUCAYAAADLP76nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQzM4RDk3M0NEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQzM4RDk3NENEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjJDMzhEOTcxQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJDMzhEOTcyQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wRxj8gAAAclJREFUeNrEl79KxEAQxnPnO9gJhwgWiiDKgeIf0HdI7OysLA4ULxbqNVd4gmBhJVrY6UP4AL6BIIp4WFxQVLSTi9/iHKzrJNnZcHHgl4RkJvt9kOzsluI49ijq4B5cerLwQQW0vP8IZQCE8U98AZ/u2eBTjYq6oE7KAFij869nHg2sh60JXXwvtvogvgRO6f3npgl1WGGEZJnwE2qCPog/McY5A2XdgNREkeKP479xCwZNA7YmihR/xIi/A0PmJ2RroijxikNG/AOocD+xrQmp+Bo4cBDfYsQ/gmEuP+klnAmJ+HXQpdymQHyTGasNRpJq0l4WJJjIEr+qie9Fw0J8gxnrCYym1ZXTepzjs2sQGff2wG5KzQ7l6NEBy+DGphPbTJWSPjEGOkxdyOSGTJ6qHbf57CRNStrsJkDEiNvUcjaY5xHVei4GgpTZJnAwMQmeGZE1wowXqvFcDAQWU6WLiSnwatR0mR9d5UxLp12J+DwmqowJU3zVpelJxecxMQPeGPHvYNa1a3OzgO3ygDORtSeYAx9avrqez7Ps6F1sO65tdBOhZc0C+CQW866bStqWMqQt5YVwUxfQlnJfULNE56u8O8pvAQYAUnCy4ged31IAAAAASUVORK5CYII=") no-repeat;-webkit-background-size:32px auto;}' +
+        '.am-toast .am-icon-error{width:13px;}' +
+        '.am-toast .am-icon-error:before{background-position:0 0;}' +
+        '.am-toast .am-icon-success{width:16px;}' +
+        '.am-toast .am-icon-success:before{background-position:-14px 0;}';
+    return csstext;
+}
+/**
+ * @description        HTMLText
+ *
+ */
+_toastSetup.HTMLText = function() {
+    var htmltext = '<div class="am-toast-text"><span class="am-icon-<%toast-type%>"></span> <%toast-message%></div>';
+    return htmltext;
+}
 
 module.exports = toast;
