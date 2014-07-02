@@ -19,26 +19,16 @@
         <div class="am-list-item am-list-item-form">
             <div class="am-list-label">message:</div>
             <div class="am-list-control">
-                <input type="text" id="message" placeholder="请填写message" value="支付成功">
+                <input type="text" id="message" placeholder="请填写message" value="加载中...">
             </div>
         </div>
         <div class="am-list-item am-list-item-form">
-            <div class="am-list-label">type:</div>
+            <div class="am-list-label">showDelay(ms):</div>
             <div class="am-list-control">
-                <select id="type">
-                    <option value="none">default: none</option>
-                    <option value="success">success</option>
-                    <option value="error">error</option>
-                </select>
-            </div>
-        </div>
-        <div class="am-list-item am-list-item-form">
-            <div class="am-list-label">hideDelay(ms):</div>
-            <div class="am-list-control">
-                <select id="hideDelay">
-                    <option value="2500">default: 2500</option>
-                    <option value="1500">1500</option>
-                    <option value="0">0</option>
+                <select id="showDelay">
+                    <option value="0">default: 0</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
                     <option value="4000">4000</option>
                     <option value="6000">6000</option>
                 </select>
@@ -58,35 +48,33 @@
 
     <div class="am-flexbox am-flexbox-average">
         <div class="am-flexbox-item">
-            <button type="button" class="J-toast-show am-button ">点我显示</button>
+            <button type="button" class="J-loading-show am-button ">点我显示</button>
         </div>
         <div class="am-flexbox-item">
-            <button type="button" class="J-toast-hide am-button am-button-white">点我隐藏</button>
+            <button type="button" class="J-loading-hide am-button am-button-white">点我隐藏</button>
         </div>
     </div>
 
 <pre class="am-ft-sm">
-AW.toast.show('您的资金已经成功转入！');
-AW.toast.show({
-    message: '认证成功',
-    type: 'success',
-    hideDelay: '2500',
+AW.loading.show('加载中...');
+AW.loading.show({
+    message: '加载中...',
+    showDelay: '2500',
     callContainer: true
 });
-AW.toast.hide();
+AW.loading.hide();
 </pre>
 </div>
 <script type="text/javascript">
-    document.querySelector('.J-toast-show').addEventListener("click", function (ele) {
-        AW.toast.show({
+    document.querySelector('.J-loading-show').addEventListener("click", function (ele) {
+        AW.loading.show({
             message: document.querySelector("#message").value,
-            type: document.querySelector("#type").value,
-            hideDelay: document.querySelector("#hideDelay").value,
+            showDelay: document.querySelector("#showDelay").value,
             callContainer: document.querySelector("#callContainer").value
         });
     }, false);
-    document.querySelector('.J-toast-hide').addEventListener("click", function (ele) {
-        AW.toast.hide();
+    document.querySelector('.J-loading-hide').addEventListener("click", function (ele) {
+        AW.loading.hide();
     }, false);
 </script>
 

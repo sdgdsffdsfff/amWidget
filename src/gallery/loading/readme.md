@@ -1,17 +1,17 @@
-# AW.toast
+# AW.loading
 
 ---
 
-toast提示
+loading提示
 
 ---
 
 ## Usage
 
-可以自定义提示文案（message），设置提示类型（none、success、error），延迟消失时间（hideDelay），是否开启容器方式调用（callContainer）。
+可以自定义提示文案（message），延迟显示时间（showDelay），是否开启容器方式调用（callContainer）。
 
 ```javascript
-AW.toast.show('认证成功');
+AW.loading.show('认证成功');
 ```
 
 ## Api
@@ -22,16 +22,9 @@ AW.toast.show('认证成功');
   
   * 提示文案
 
-#### type `String` 默认 'none'
+#### showDelay `String` 默认 '0'
 
-  * 'none' : 不显示图标
-  * 'success' 会显示成功图标（对钩）
-  * 'error' 会显示失败图标（八叉）
-  * 'xxx'： 任意名称，需要自己定义图标对应的class属性。例如：am-icon-xxx
-
-#### hideDelay `String` 默认 '2500'
-
-  * '2500' : 延时隐藏toast，毫秒
+  * '2500' : 延时显示loading，毫秒
 
 #### callContainer `Boolean` 默认 'true'
 
@@ -40,27 +33,26 @@ AW.toast.show('认证成功');
 
 ### 方法
 
-#### toast.show() 显示toast
+#### loading.show() 显示loading
 
 简单调用：
 
 ```javascript
-AW.toast.show('认证成功');
+AW.loading.show('加载中...');
 ```
 
 或者完整参数调用：
 
 ```javascript
-AW.toast.show({
-    message: '认证成功',
-    type: 'success',
-    hideDelay: '2500',
+AW.loading.show({
+    message: '加载中...',
+    showDelay: '2500',
     callContainer: true
 });
 ```
 
-#### toast.hide() 隐藏toast
+#### loading.hide() 隐藏loading
 
 ```javascript
-AW.toast.hide();
+AW.loading.hide();
 ```
