@@ -40,7 +40,7 @@ AW.toast.show('\u8BA4\u8BC1\u6210\u529F');
 
 ### \u65B9\u6CD5
 
-#### toast.show() \u663E\u793Atoast
+#### AW.toast.show() \u663E\u793Atoast
 
 \u7B80\u5355\u8C03\u7528\uFF1A
 
@@ -59,7 +59,7 @@ AW.toast.show({
 });
 ```
 
-#### toast.hide() \u9690\u85CFtoast
+#### AW.toast.hide() \u9690\u85CFtoast
 
 ```javascript
 AW.toast.hide();

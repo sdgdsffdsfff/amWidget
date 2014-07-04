@@ -33,7 +33,7 @@ AW.loading.show('认证成功');
 
 ### 方法
 
-#### loading.show() 显示loading
+#### AW.loading.show() 显示loading
 
 简单调用：
 
@@ -51,7 +51,7 @@ AW.loading.show({
 });
 ```
 
-#### loading.hide() 隐藏loading
+#### AW.loading.hide() 隐藏loading
 
 ```javascript
 AW.loading.hide();
