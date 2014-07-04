@@ -1,3 +1,5 @@
+window.AW = window.AW||{};
+(function(){
 /**
  *
  * AW.loading
@@ -285,4 +287,5 @@ _loadingSetup.HTMLText = function() {
     return htmltext;
 }
 
-module.exports = loading;
+window.AW.loading = loading;
+})();

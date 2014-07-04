@@ -2,64 +2,64 @@
 
 ---
 
-toast提示
+toast\u63D0\u793A
 
 ---
 
 ## Usage
 
-可以自定义提示文案（message），设置提示类型（none、success、error），延迟消失时间（hideDelay），是否开启容器方式调用（callContainer）。
+\u53EF\u4EE5\u81EA\u5B9A\u4E49\u63D0\u793A\u6587\u6848\uFF08message\uFF09\uFF0C\u8BBE\u7F6E\u63D0\u793A\u7C7B\u578B\uFF08none\u3001success\u3001fail\uFF09\uFF0C\u5EF6\u8FDF\u6D88\u5931\u65F6\u95F4\uFF08hideDelay\uFF09\uFF0C\u662F\u5426\u5F00\u542F\u5BB9\u5668\u65B9\u5F0F\u8C03\u7528\uFF08callContainer\uFF09\u3002
 
 ```javascript
-AW.toast.show('认证成功');
+AW.toast.show('\u8BA4\u8BC1\u6210\u529F');
 ```
 
 ## Api
 
-### 配置项
+### \u914D\u7F6E\u9879
 
-#### message `String` 默认 ''
+#### message `String` \u9ED8\u8BA4 ''
   
-  * 提示文案
+  * \u63D0\u793A\u6587\u6848
 
-#### type `String` 默认 'none'
+#### type `String` \u9ED8\u8BA4 'none'
 
-  * 'none' : 不显示图标
-  * 'success' 会显示成功图标（对钩）
-  * 'error' 会显示失败图标（八叉）
-  * 'xxx'： 任意名称，需要自己定义图标对应的class属性。例如：am-icon-xxx
+  * 'none' : \u4E0D\u663E\u793A\u56FE\u6807
+  * 'success' \u4F1A\u663E\u793A\u6210\u529F\u56FE\u6807\uFF08\u5BF9\u94A9\uFF09
+  * 'fail' \u4F1A\u663E\u793A\u5931\u8D25\u56FE\u6807\uFF08\u516B\u53C9\uFF09
+  * 'xxx'\uFF1A \u4EFB\u610F\u540D\u79F0\uFF0C\u9700\u8981\u81EA\u5DF1\u5B9A\u4E49\u56FE\u6807\u5BF9\u5E94\u7684class\u5C5E\u6027\u3002\u4F8B\u5982\uFF1Aam-icon-xxx
 
-#### hideDelay `String` 默认 '2500'
+#### hideDelay `String` \u9ED8\u8BA4 '2500'
 
-  * '2500' : 延时隐藏toast，毫秒
+  * '2500' : \u5EF6\u65F6\u9690\u85CFtoast\uFF0C\u6BEB\u79D2
 
-#### callContainer `Boolean` 默认 'true'
+#### callContainer `Boolean` \u9ED8\u8BA4 'true'
 
-  * true : 开启容器方法
-  * false : 关闭容器方法
+  * true : \u5F00\u542F\u5BB9\u5668\u65B9\u6CD5
+  * false : \u5173\u95ED\u5BB9\u5668\u65B9\u6CD5
 
-### 方法
+### \u65B9\u6CD5
 
-#### toast.show() 显示toast
+#### toast.show() \u663E\u793Atoast
 
-简单调用：
+\u7B80\u5355\u8C03\u7528\uFF1A
 
 ```javascript
-AW.toast.show('认证成功');
+AW.toast.show('\u8BA4\u8BC1\u6210\u529F');
 ```
 
-或者完整参数调用：
+\u6216\u8005\u5B8C\u6574\u53C2\u6570\u8C03\u7528\uFF1A
 
 ```javascript
 AW.toast.show({
-    message: '认证成功',
+    message: '\u8BA4\u8BC1\u6210\u529F',
     type: 'success',
     hideDelay: '2500',
     callContainer: true
 });
 ```
 
-#### toast.hide() 隐藏toast
+#### toast.hide() \u9690\u85CFtoast
 
 ```javascript
 AW.toast.hide();

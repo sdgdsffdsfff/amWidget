@@ -87,11 +87,7 @@ var _alipayContainer = {
      *
      */
     callApi : function () {
-        if (toast.options.type === 'success' || toast.options.type === 'error') {
-            //fix 容器参数不同
-            if (toast.options.type === 'error') {
-                toast.options.type = 'fail';
-            }
+        if (toast.options.type === 'success' || toast.options.type === 'fail') {
             //执行容器toast
             this.callBridge('toast', {
                 content: toast.options.message,
@@ -153,17 +149,25 @@ var _toastSetup = {
      *
      */
     setHTML: function () {
+        var that = this;
         var HTMLText = this.HTMLText().replace('<%toast-type%>', toast.options.type);
         HTMLText = HTMLText.replace('<%toast-message%>', toast.options.message);
+        var setPostion = function(toastDom){
+            window.setTimeout(function(){
+                toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
+            }, 0)
+        }
         if (this.isSetHTML) {
             this.toastDom.innerHTML = HTMLText;
+            setPostion(that.toastDom);
         } else {
             var toastDom = document.createElement('div');
             toastDom.className = 'am-toast am-toast-hide';
             toastDom.innerHTML = HTMLText;
-            this.toastDom = toastDom;
             document.body.appendChild(toastDom);
+            this.toastDom = toastDom;
             this.isSetHTML = true;
+            setPostion(that.toastDom);
         }
         return this;
     },
@@ -172,11 +176,10 @@ var _toastSetup = {
      *
      */
     show: function () {
-        var that = this;
         this.hide();
-        that.toastDom.classList.remove('am-toast-hide');
-        that.toastDom.classList.add('am-toast-show');
-        that.hideDelay();
+        this.toastDom.classList.remove('am-toast-hide');
+        this.toastDom.classList.add('am-toast-show');
+        this.hideDelay();
     },
     /**
      * @description 隐藏toast
@@ -216,7 +219,7 @@ var toast = {}
  * @description 默认配置参数
  *
  * @param {String} message - 默认文案
- * @param {String} type - 类型（none | success | error）
+ * @param {String} type - 类型（none | success | fail）
  * @param {String} hideDelay - 延迟隐藏时间（毫秒）
  * @param {Boolean} callContainer - 是否开启容器native调用
  *
@@ -233,7 +236,7 @@ toast.options = {
  * @description        显示toast
  * @param {string|object} options
  *
- * @memberof    AW
+ * @memberof    AW.toast
  */
 toast.show = function (options) {
     //对象 参数覆盖
@@ -251,11 +254,10 @@ toast.show = function (options) {
 }
 /**
  * @description        隐藏toast
- * @param              {string}    message         提示的文案
  *
- * @memberof    AW
+ * @memberof    AW.toast
  */
-toast.hide = function (message) {
+toast.hide = function () {
     _toastSetup.hide();
 }
 
@@ -264,15 +266,15 @@ toast.hide = function (message) {
  *
  */
 _toastSetup.CSSText = function () {
-    var csstext = '.am-toast{position:fixed;z-index:100;top:45%;width:100%;text-align:center;font-size:16px;font-family:sans-serif;}' +
+    var csstext = '.am-toast{position:fixed;z-index:100;top:45%;left:50%;text-align:center;font-size:16px;font-family:sans-serif;}' +
         '.am-toast .am-toast-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-toast .am-toast-text .iconfont{font-size:16px;}' +
         '.am-toast-show{display:block;}' +
         '.am-toast-hide{display:none;}' +
-        '.am-toast .am-icon-error,.am-toast .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}' +
-        '.am-toast .am-icon-error:before,.am-toast .am-icon-success:before{content:"";display:block;width:100%;height:100%;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAUCAYAAADLP76nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQzM4RDk3M0NEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQzM4RDk3NENEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjJDMzhEOTcxQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJDMzhEOTcyQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wRxj8gAAAclJREFUeNrEl79KxEAQxnPnO9gJhwgWiiDKgeIf0HdI7OysLA4ULxbqNVd4gmBhJVrY6UP4AL6BIIp4WFxQVLSTi9/iHKzrJNnZcHHgl4RkJvt9kOzsluI49ijq4B5cerLwQQW0vP8IZQCE8U98AZ/u2eBTjYq6oE7KAFij869nHg2sh60JXXwvtvogvgRO6f3npgl1WGGEZJnwE2qCPog/McY5A2XdgNREkeKP479xCwZNA7YmihR/xIi/A0PmJ2RroijxikNG/AOocD+xrQmp+Bo4cBDfYsQ/gmEuP+klnAmJ+HXQpdymQHyTGasNRpJq0l4WJJjIEr+qie9Fw0J8gxnrCYym1ZXTepzjs2sQGff2wG5KzQ7l6NEBy+DGphPbTJWSPjEGOkxdyOSGTJ6qHbf57CRNStrsJkDEiNvUcjaY5xHVei4GgpTZJnAwMQmeGZE1wowXqvFcDAQWU6WLiSnwatR0mR9d5UxLp12J+DwmqowJU3zVpelJxecxMQPeGPHvYNa1a3OzgO3ygDORtSeYAx9avrqez7Ps6F1sO65tdBOhZc0C+CQW866bStqWMqQt5YVwUxfQlnJfULNE56u8O8pvAQYAUnCy4ged31IAAAAASUVORK5CYII=") no-repeat;-webkit-background-size:32px auto;}' +
-        '.am-toast .am-icon-error{width:13px;}' +
-        '.am-toast .am-icon-error:before{background-position:0 0;}' +
+        '.am-toast .am-icon-fail,.am-toast .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}' +
+        '.am-toast .am-icon-fail:before,.am-toast .am-icon-success:before{content:"";display:block;width:100%;height:100%;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAUCAYAAADLP76nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQzM4RDk3M0NEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQzM4RDk3NENEMzkxMUUzOTA5QkQ5NjEwMTU4QkI2MCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjJDMzhEOTcxQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJDMzhEOTcyQ0QzOTExRTM5MDlCRDk2MTAxNThCQjYwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wRxj8gAAAclJREFUeNrEl79KxEAQxnPnO9gJhwgWiiDKgeIf0HdI7OysLA4ULxbqNVd4gmBhJVrY6UP4AL6BIIp4WFxQVLSTi9/iHKzrJNnZcHHgl4RkJvt9kOzsluI49ijq4B5cerLwQQW0vP8IZQCE8U98AZ/u2eBTjYq6oE7KAFij869nHg2sh60JXXwvtvogvgRO6f3npgl1WGGEZJnwE2qCPog/McY5A2XdgNREkeKP479xCwZNA7YmihR/xIi/A0PmJ2RroijxikNG/AOocD+xrQmp+Bo4cBDfYsQ/gmEuP+klnAmJ+HXQpdymQHyTGasNRpJq0l4WJJjIEr+qie9Fw0J8gxnrCYym1ZXTepzjs2sQGff2wG5KzQ7l6NEBy+DGphPbTJWSPjEGOkxdyOSGTJ6qHbf57CRNStrsJkDEiNvUcjaY5xHVei4GgpTZJnAwMQmeGZE1wowXqvFcDAQWU6WLiSnwatR0mR9d5UxLp12J+DwmqowJU3zVpelJxecxMQPeGPHvYNa1a3OzgO3ygDORtSeYAx9avrqez7Ps6F1sO65tdBOhZc0C+CQW866bStqWMqQt5YVwUxfQlnJfULNE56u8O8pvAQYAUnCy4ged31IAAAAASUVORK5CYII=") no-repeat;-webkit-background-size:32px auto;}' +
+        '.am-toast .am-icon-fail{width:13px;}' +
+        '.am-toast .am-icon-fail:before{background-position:0 0;}' +
         '.am-toast .am-icon-success{width:16px;}' +
         '.am-toast .am-icon-success:before{background-position:-14px 0;}';
     return csstext;
