@@ -91,6 +91,8 @@ var _alipayContainer = {
                 message: dialog.options.message,
                 button : dialog.options.okButton
             }, function () {
+                var result = {};
+                result.ok = true;
                 dialog.callback(result);
             });
         } else if(dialog.options.type === 'confirm') {
@@ -347,7 +349,7 @@ _dialogSetup.CSSText = function () {
         '.am-dialog .am-dialog-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-dialog .am-dialog-text .iconfont{font-size:16px;}' +
         '.am-dialog-show,.am-dialog-mask-show{display:block;}' +
-        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}' +
+        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}'
     return csstext;
 }
 /**

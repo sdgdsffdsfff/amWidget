@@ -93,7 +93,7 @@ var _alipayContainer = {
                 message: dialog.options.message,
                 button : dialog.options.okButton
             }, function () {
-                console.log('alert dismissed');
+                dialog.callback(result);
             });
         } else if(dialog.options.type === 'confirm') {
             AlipayJSBridge.call('confirm', {
@@ -102,7 +102,7 @@ var _alipayContainer = {
                 okButton    : dialog.options.okButton,
                 cancelButton: dialog.options.cancelButton
             }, function (result) {
-                console.log(result.ok);
+                dialog.callback(result);
             });
         }
     }
@@ -159,7 +159,6 @@ var _dialogSetup = {
      *
      */
     setHTML: function () {
-        var that = this;
         var HTMLText = this.HTMLText().replace('<%dialog-title%>', dialog.options.title);
         HTMLText = HTMLText.replace('<%dialog-message%>', dialog.options.message);
         if (this.isSetHTML) {
@@ -180,35 +179,43 @@ var _dialogSetup = {
 
             this.isSetHTML = true;
         }
-
+        this.setButton();
+        return this;
+    },
+    /**
+     * @description 设置Button
+     *
+     */
+    setButton : function(){
+        var that = this;
+        //创建按钮Dom
         var cancelButtonHTMLText = this.cancelButtonHTMLText().replace('<%dialog-cancelButton%>', dialog.options.cancelButton);
         var okButtonHTMLText = this.okButtonHTMLText().replace('<%dialog-okButton%>', dialog.options.okButton);
 
-        //需要绑定事件 okButton cancelButton
+        //区分alert&confirm
         if(dialog.options.type === 'alert'){
-            document.querySelectorAll(".am-dialog .am-dialog-button-container")[0].innerHTML = cancelButtonHTMLText;
+            this.dialogDom.querySelector(".am-dialog-button-container").innerHTML = okButtonHTMLText;
         } else if (dialog.options.type === 'confirm') {
-            document.querySelectorAll(".am-dialog .am-dialog-button-container")[0].innerHTML = cancelButtonHTMLText + okButtonHTMLText;
+            this.dialogDom.querySelector(".am-dialog-button-container").innerHTML = cancelButtonHTMLText + okButtonHTMLText;
         }
 
-        var cancelButtonEvent = function (ele) {
-            that.hide();
+        //绑定事件，增加回调
+        if(dialog.options.type === 'confirm'){
+            var cancelButtonEvent = function (ele) {
+                var result = {};
+                result.ok = false;
+                dialog.callback(result);
+                that.hide();
+            }
+            this.dialogDom.querySelector("#J-dialog-cancel").addEventListener("click", cancelButtonEvent, false);
         }
-        document.querySelectorAll(".am-dialog .am-dialog-button-container button")[0].addEventListener("click", cancelButtonEvent, false);
 
         var okButtonEvent = function (ele) {
-
+            var result = {};
+            result.ok = true;
+            dialog.callback(result);
         }
-        document.querySelectorAll(".am-dialog .am-dialog-button-container button")[0].addEventListener("click", okButtonEvent, false);
-
-
-
-
-
-
-
-
-        return this;
+        this.dialogDom.querySelector("#J-dialog-ok").addEventListener("click", okButtonEvent, false);
     },
     /**
      * @description 显示dialog
@@ -263,12 +270,18 @@ dialog.options = {
     'callContainer': true
 }
 /**
+ * @description        回调函数
+ *
+ * @memberof    AW
+ */
+dialog.callback = function(){};
+/**
  * @description        显示dialog
  * @param {string|object} options
  *
  * @memberof    AW
  */
-dialog.show = function (options) {
+dialog.show = function (options, fn) {
     //对象 参数覆盖
     if (typeof(options) === 'object') {
         for (var p in options) {
@@ -278,7 +291,6 @@ dialog.show = function (options) {
         if(!options.type || options.type === '') { this.options.type = 'alert' }
         if(!options.okButton || options.okButton === '') { this.options.okButton = '确定' }
         if(!options.cancelButton || options.cancelButton === '') { this.options.cancelButton = '取消' }
-        _dialogSetup.init();
     }
     //字符串 直接替换message
     else if (typeof(options) === 'string') {
@@ -287,8 +299,13 @@ dialog.show = function (options) {
         this.options.type = 'alert';
         this.options.okButton = '确定';
         this.options.cancelButton = '取消';
-        _dialogSetup.init();
     }
+    if(typeof(fn) === 'function') {
+        this.callback = fn;
+    } else {
+        this.callback = null;
+    }
+    _dialogSetup.init();
 }
 /**
  * @description        显示dialog
@@ -296,14 +313,11 @@ dialog.show = function (options) {
  *
  * @memberof    AW
  */
-dialog.alert = function (message, title, fn) {
+dialog.alert = function (message, fn) {
     var options = {};
     options.type = 'alert';
     options.message = message;
-    if(title && title != ''){
-        options.title = title;
-    }
-    dialog.show(options);
+    dialog.show(options, fn);
 }
 /**
  * @description        显示dialog
@@ -311,14 +325,11 @@ dialog.alert = function (message, title, fn) {
  *
  * @memberof    AW
  */
-dialog.confirm = function (message, title, fn) {
+dialog.confirm = function (message, fn) {
     var options = {};
     options.type = 'confirm';
     options.message = message;
-    if(title && title != ''){
-        options.title = title;
-    }
-    dialog.show(options);
+    dialog.show(options, fn);
 }
 /**
  * @description        隐藏dialog
@@ -338,12 +349,7 @@ _dialogSetup.CSSText = function () {
         '.am-dialog .am-dialog-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-dialog .am-dialog-text .iconfont{font-size:16px;}' +
         '.am-dialog-show,.am-dialog-mask-show{display:block;}' +
-        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}' +
-        '.am-dialog .am-icon-error,.am-dialog .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}' +
-        '.am-dialog .am-icon-error{width:13px;}' +
-        '.am-dialog .am-icon-error:before{background-position:0 0;}' +
-        '.am-dialog .am-icon-success{width:16px;}' +
-        '.am-dialog .am-icon-success:before{background-position:-14px 0;}';
+        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}'
     return csstext;
 }
 /**
@@ -371,7 +377,7 @@ _dialogSetup.maskHTMLText = function() {
  *
  */
 _dialogSetup.cancelButtonHTMLText = function() {
-    var htmltext = '<div class="am-flexbox-item"><button type="button" class="am-button am-button-white"><%dialog-cancelButton%></button></div>'
+    var htmltext = '<div class="am-flexbox-item"><button type="button" id="J-dialog-cancel"  class="am-button am-button-white"><%dialog-cancelButton%></button></div>'
     return htmltext;
 }
 /**
@@ -379,7 +385,7 @@ _dialogSetup.cancelButtonHTMLText = function() {
  *
  */
 _dialogSetup.okButtonHTMLText = function() {
-    var htmltext = '<div class="am-flexbox-item"><button type="button" class="am-button am-button-blue"><%dialog-okButton%></button></div>'
+    var htmltext = '<div class="am-flexbox-item"><button type="button" id="J-dialog-ok" class="am-button am-button-blue"><%dialog-okButton%></button></div>'
     return htmltext;
 }
 
