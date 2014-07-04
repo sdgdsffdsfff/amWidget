@@ -70,24 +70,28 @@ AW.dialog.show({
 
 #### AW.dialog.alert() 显示alert类型的dialog
 
-```AW.dialog.alert('确定要这么干吧');
+```javascript
+AW.dialog.alert('确定要这么干吧');
 ```
 
 回调：
 
-```AW.dialog.alert('确定要这么干吧', function(result){
+```javascript
+AW.dialog.alert('确定要这么干吧', function(result){
     console.log(result.ok)
 });
 ```
 
 #### AW.dialog.confirm() 显示confirm类型的dialog
 
-```AW.dialog.confirm('确定要这么干吧');
+```javascript
+AW.dialog.confirm('确定要这么干吧');
 ```
 
 回调：
 
-```AW.dialog.confirm('确定要这么干吧', function(result){
+```javascript
+AW.dialog.confirm('确定要这么干吧', function(result){
     console.log(result.ok)
 });
 ```
