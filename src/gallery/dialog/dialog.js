@@ -348,11 +348,6 @@ _dialogSetup.CSSText = function () {
         '.am-dialog .am-dialog-text .iconfont{font-size:16px;}' +
         '.am-dialog-show,.am-dialog-mask-show{display:block;}' +
         '.am-dialog-hide,.am-dialog-mask-hide{display:none;}' +
-        '.am-dialog .am-icon-error,.am-dialog .am-icon-success{display:inline-block;height:15px;vertical-align:middle;}' +
-        '.am-dialog .am-icon-error{width:13px;}' +
-        '.am-dialog .am-icon-error:before{background-position:0 0;}' +
-        '.am-dialog .am-icon-success{width:16px;}' +
-        '.am-dialog .am-icon-success:before{background-position:-14px 0;}';
     return csstext;
 }
 /**
