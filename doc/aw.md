@@ -4,3 +4,7 @@
 
 
 ------
+
+## 源代码地址
+[amw源代码](https://github.com/am-team/amWidget/tree/master/dist)
+
