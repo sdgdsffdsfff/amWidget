@@ -11,6 +11,7 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <link rel="stylesheet" type="text/css" href="http://static.alipayobjects.com/amui/base/1.0.1/amui-https.css"
           media="all">
+    <link rel="stylesheet" href="lib/test.css"/>
     <script src="lib/zepto.js"></script>
     <script type="text/javascript" src="lib/gallery/lazyload/lazyload.js"></script>
     <style>
@@ -23,76 +24,79 @@
 <div class="am-header">
     <h1>lazyload demo示例</h1>
 </div>
-<div id="pics">
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/1" width="200"
-             height="100"/>
+<div id="tests">
+    <div id="pics">
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/1" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/2" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/3" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/4" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/technics/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/transport/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/business/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/abstract/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/animals/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/fashion/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nightlife/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/city/" width="200" height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/cats/" width="200" height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/sports/" width="200"
+                 height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/food/" width="200" height="100"/>
+        </div>
+        <div>
+            <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/people/" width="200"
+                 height="100"/>
+        </div>
     </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/2" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/3" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nature/4" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/technics/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/transport/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/business/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/abstract/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/animals/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/fashion/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/nightlife/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/city/" width="200" height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/cats/" width="200" height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/sports/" width="200"
-             height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/food/" width="200" height="100"/>
-    </div>
-    <div>
-        <img src="http://placehold.it/200x100" data-src="http://lorempixel.com/200/100/people/" width="200"
-             height="100"/>
-    </div>
+
+    <h3>动态增加图片</h3>
+    <a href="javascript:;" id="add_pic" class="am-button">增加图片</a>
+
+    <h3>动态加载lazy load特性</h3>
+    <a href="javascript:;" id="add_load" class="am-button">增加lazyLoad</a>
 </div>
 
 
-<h3>动态增加图片</h3>
-<a href="javascript:;" id="add_pic" class="am-button">增加图片</a>
-
-<h3>动态加载lazy load特性</h3>
-<a href="javascript:;" id="add_load" class="am-button">增加lazyLoad</a>
 <script type="text/javascript">
     $("#add_pic").live("click", function () {
         var htmlStr = '';
