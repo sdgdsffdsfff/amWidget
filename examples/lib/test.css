@@ -1,5 +1,9 @@
+body {
+    /*margin: 15px;*/
+}
+
 .contain {
-    margin: 15px 0 30px;
+    margin: 15px 15px 30px;
     border-bottom: 1px dashed #333;
     padding-bottom: 15px;
 }
@@ -32,4 +36,15 @@ p, h5, .pre {
     word-break: break-all;
     min-height: 15px;
     margin-bottom: 15px;
+}
+
+.am-header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+#tests{
+    margin: 50px 15px;
 }
