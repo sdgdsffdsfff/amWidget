@@ -13,41 +13,13 @@
     <link rel="stylesheet" href="lib/test.css"/>
     <script type="text/javascript" src="lib/gallery/dialog/dialog.js"></script>
     <style>
-        .am-dialog {
-            -webkit-box-sizing: border-box;
-            -ms-box-sizing: border-box;
-            box-sizing: border-box;
+        .am-list-item-form {
+            position: relative;
+        }
+        .am-list-arrow {
             position: absolute;
-            top: 50%;
-            z-index: 101;
-            width: 100%;
-            padding: 0 20px;
-            margin-top: -80px;
-        }
-        .am-dialog p {
-            margin: 14px 0 24px 0;
-            text-align: center;
-        }
-        .am-dialog-title {
-            padding-top: 7px;
-            text-align: center;
-            font-weight: 700;
-        }
-        .am-dialog-content {
-            margin: auto;
-            max-width: 320px;
-            padding: 10px;
-            background: #e8e8e8;
-            border-radius: 8px;
-        }
-        .am-dialog-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 99;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            right: 10px;
+            top: 8px;
         }
     </style>
 </head>
@@ -78,6 +50,7 @@
                         <option value="confirm">confirm</option>
                     </select>
                 </div>
+                <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
             </div>
             <div class="am-list-item am-list-item-form">
                 <div class="am-list-label">okButton:</div>
@@ -99,6 +72,7 @@
                         <option value="false">false</option>
                     </select>
                 </div>
+                <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
             </div>
         </div>
         <div class="am-list-item am-list-item-form">
@@ -110,9 +84,6 @@
             <div class="am-flexbox-item">
                 <button type="button" class="J-dialog-show am-button ">点我显示</button>
             </div>
-            <!--<div class="am-flexbox-item">-->
-                <!--<button type="button" class="J-dialog-hide am-button am-button-white">点我隐藏</button>-->
-            <!--</div>-->
         </div>
         <div class="am-flexbox am-flexbox-average" style="margin-top: 10px;">
             <div class="am-flexbox-item">
@@ -157,9 +128,6 @@ AW.dialog.confirm('确定要这么干吧', function(result){
         }, function (result) {
             eval(document.querySelector("#callback").value);
         });
-    }, false);
-    document.querySelector('.J-dialog-hide').addEventListener("click", function (ele) {
-        AW.dialog.hide();
     }, false);
     document.querySelector('.J-dialog-alert').addEventListener("click", function (ele) {
         AW.dialog.alert('这是个alert，没有取消按钮', function (result) {

@@ -93,6 +93,8 @@ var _alipayContainer = {
                 message: dialog.options.message,
                 button : dialog.options.okButton
             }, function () {
+                var result = {};
+                result.ok = true;
                 dialog.callback(result);
             });
         } else if(dialog.options.type === 'confirm') {
@@ -345,11 +347,13 @@ dialog.hide = function () {
  *
  */
 _dialogSetup.CSSText = function () {
-    var csstext = '.am-dialog{position:fixed;z-index:100;top:45%;width:100%;text-align:center;font-size:16px;font-family:sans-serif;}' +
-        '.am-dialog .am-dialog-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
-        '.am-dialog .am-dialog-text .iconfont{font-size:16px;}' +
+    var csstext = '.am-dialog{-webkit-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;position:absolute;top:50%;z-index:101;width:100%;padding:0 20px;margin-top:-80px}' +
         '.am-dialog-show,.am-dialog-mask-show{display:block;}' +
-        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}'
+        '.am-dialog-hide,.am-dialog-mask-hide{display:none;}' +
+        '.am-dialog p{margin:14px 0 24px 0;text-align:center}' +
+        '.am-dialog-title{padding-top:7px;text-align:center;font-weight:700}' +
+        '.am-dialog-content{margin:auto;max-width:320px;padding:10px;background:#e8e8e8;border-radius:8px}' +
+        '.am-dialog-mask{position:fixed;top:0;left:0;z-index:99;width:100%;height:100%;background:rgba(0,0,0,0.5)}'
     return csstext;
 }
 /**
