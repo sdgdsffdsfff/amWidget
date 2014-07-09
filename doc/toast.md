@@ -4,7 +4,7 @@
 	
 ### 示例代码
 js
-```
+```javascript
 //简单调用：
 toast.show('认证成功');
 //完整参数调用：
@@ -45,4 +45,11 @@ toast.hide(); //隐藏
 
 #### toast.hide() 隐藏toast
 
-### 演示
+### Demo
+**二维码地址**
+
+![toast demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30RA5c6f8h.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/toast.html)

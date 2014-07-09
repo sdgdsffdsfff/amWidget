@@ -8,7 +8,7 @@ html
 	<img data-src="real_pic.png">	//页面载入后自动加载real_pic并显示
 ```
 js
-```
+```javascript
 	var opt = {
 		"auto": true,				//是否自动加载标示位
 		"offsetPre": 10,			//预加载偏移量，默认10，提升懒加载体验
@@ -22,7 +22,7 @@ js
 
 ### 接口列表
 
-```
+```javascript
 	/**
 	 * 初始化方法
 	 *
@@ -60,3 +60,10 @@ js
 ```
 
 ### Demo
+**二维码地址**
+
+![lazyload demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30RDnPmXup.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/lazyload.html)

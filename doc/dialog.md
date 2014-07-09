@@ -4,7 +4,7 @@
 	
 ### 示例代码
 js
-```
+```javascript
 	/**
 	 * 默认配置参数
 	 *
@@ -36,7 +36,7 @@ js
 
 ### 接口列表
 
-```
+```javascript
 	/**
 	 * 显示toast
 	 *
@@ -77,5 +77,11 @@ js
 	
 ```
 
+### Demo
+**二维码地址**
 
-### 演示 可选
+![dialog demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30R5KlY0sR.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/dialog.html)
