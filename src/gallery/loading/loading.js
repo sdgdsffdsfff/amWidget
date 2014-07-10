@@ -159,29 +159,7 @@ var _loadingSetup = {
             this.loadingDom = loadingDom;
             this.isSetHTML = true;
         }
-        //that.setPostion(that.loadingDom);
         return this;
-    },
-    /**
-     * @description 定位（绝对居中）
-     *
-     */
-    setPostion : function(toastDom){
-        var cssConfig = 'display:inline-block;visibility:hidden';
-        toastDom.style.cssText = cssConfig;
-
-        console.log(document.querySelector(".am-loading").offsetWidth)
-
-        window.setTimeout(function(){
-            console.log(document.querySelector(".am-loading").offsetWidth)
-        }, 200)
-
-
-        window.setTimeout(function(){
-            cssConfig = 'margin-left:-' + parseInt(document.querySelector(".am-loading").offsetWidth / 2) + 'px;margin-top:-' + toastDom.offsetHeight / 2 + 'px';
-            toastDom.style.cssText = cssConfig;
-        }, 100)
-
     },
     /**
      * @description 显示loading

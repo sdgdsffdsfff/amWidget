@@ -27,72 +27,71 @@
 <div class="am-header">
     <h1>对话框demo示例</h1>
 </div>
-<div id="tests">
-    <div class="am-content">
-        <div class="am-list">
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">title:</div>
-                <div class="am-list-control">
-                    <input type="text" id="title" placeholder="请填写title" value="亲～">
-                </div>
-            </div>
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">message:</div>
-                <div class="am-list-control">
-                    <input type="text" id="message" placeholder="请填写message" value="确定要这么干吗？">
-                </div>
-            </div>
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">type:</div>
-                <div class="am-list-control">
-                    <select id="type">
-                        <option value="alert">default: alert</option>
-                        <option value="confirm">confirm</option>
-                    </select>
-                </div>
-                <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
-            </div>
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">okButton:</div>
-                <div class="am-list-control">
-                    <input type="text" id="okButton" placeholder="请填写okButton" value="确定">
-                </div>
-            </div>
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">cancelButton:</div>
-                <div class="am-list-control">
-                    <input type="text" id="cancelButton" placeholder="请填写cancelButton" value="取消">
-                </div>
-            </div>
-            <div class="am-list-item am-list-item-form">
-                <div class="am-list-label">callContainer:</div>
-                <div class="am-list-control">
-                    <select id="callContainer">
-                        <option value="true">default: true</option>
-                        <option value="false">false</option>
-                    </select>
-                </div>
-                <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
+<div class="am-content" style="margin-top: 50px;">
+    <div class="am-list">
+        <div class="am-list-item am-list-item-form">
+            <div class="am-list-label">title:</div>
+            <div class="am-list-control">
+                <input type="text" id="title" placeholder="请填写title" value="亲～">
             </div>
         </div>
         <div class="am-list-item am-list-item-form">
-            <h5>callback</h5>
-            <textarea id="callback" style="width: 100%; height: 60px;text-align: left;">console.log(result.ok);
-                AW.dialog.hide();</textarea>
-        </div>
-        <div class="am-flexbox am-flexbox-average">
-            <div class="am-flexbox-item">
-                <button type="button" class="J-dialog-show am-button ">点我显示</button>
+            <div class="am-list-label">message:</div>
+            <div class="am-list-control">
+                <input type="text" id="message" placeholder="请填写message" value="确定要这么干吗？">
             </div>
         </div>
-        <div class="am-flexbox am-flexbox-average" style="margin-top: 10px;">
-            <div class="am-flexbox-item">
-                <button type="button" class="J-dialog-alert am-button ">一键alert</button>
+        <div class="am-list-item am-list-item-form">
+            <div class="am-list-label">type:</div>
+            <div class="am-list-control">
+                <select id="type">
+                    <option value="alert">default: alert</option>
+                    <option value="confirm">confirm</option>
+                </select>
             </div>
-            <div class="am-flexbox-item">
-                <button type="button" class="J-dialog-confirm am-button">一键confirm</button>
+            <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
+        </div>
+        <div class="am-list-item am-list-item-form">
+            <div class="am-list-label">okButton:</div>
+            <div class="am-list-control">
+                <input type="text" id="okButton" placeholder="请填写okButton" value="确定">
             </div>
         </div>
+        <div class="am-list-item am-list-item-form">
+            <div class="am-list-label">cancelButton:</div>
+            <div class="am-list-control">
+                <input type="text" id="cancelButton" placeholder="请填写cancelButton" value="取消">
+            </div>
+        </div>
+        <div class="am-list-item am-list-item-form">
+            <div class="am-list-label">callContainer:</div>
+            <div class="am-list-control">
+                <select id="callContainer">
+                    <option value="true">default: true</option>
+                    <option value="false">false</option>
+                </select>
+            </div>
+            <div class="am-list-arrow"><span class="am-icon-arrow-vertical"></span></div>
+        </div>
+    </div>
+    <div class="am-list-item am-list-item-form">
+        <h5>callback</h5>
+        <textarea id="callback" style="width: 100%; height: 60px;text-align: left;">console.log(result.ok);
+            AW.dialog.hide();</textarea>
+    </div>
+    <div class="am-flexbox am-flexbox-average">
+        <div class="am-flexbox-item">
+            <button type="button" class="J-dialog-show am-button ">点我显示</button>
+        </div>
+    </div>
+    <div class="am-flexbox am-flexbox-average" style="margin-top: 10px;">
+        <div class="am-flexbox-item">
+            <button type="button" class="J-dialog-alert am-button ">一键alert</button>
+        </div>
+        <div class="am-flexbox-item">
+            <button type="button" class="J-dialog-confirm am-button">一键confirm</button>
+        </div>
+    </div>
 <pre class="am-ft-sm">
 AW.dialog.show({
     title: '亲',
@@ -113,8 +112,8 @@ AW.dialog.confirm('确定要这么干吧', function(result){
     console.log(result.ok)
 });
 </pre>
-    </div>
 </div>
+
 
 <script type="text/javascript">
     document.querySelector('.J-dialog-show').addEventListener("click", function (ele) {

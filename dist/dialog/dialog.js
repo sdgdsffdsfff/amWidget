@@ -347,7 +347,7 @@ dialog.hide = function () {
  *
  */
 _dialogSetup.CSSText = function () {
-    var csstext = '.am-dialog{-webkit-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;position:absolute;top:50%;z-index:101;width:100%;padding:0 20px;margin-top:-80px}' +
+    var csstext = '.am-dialog{-webkit-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;position:fixed;top:45%;z-index:101;width:100%;padding:0 20px;margin-top:-80px}' +
         '.am-dialog-show,.am-dialog-mask-show{display:block;}' +
         '.am-dialog-hide,.am-dialog-mask-hide{display:none;}' +
         '.am-dialog p{margin:14px 0 24px 0;text-align:center}' +

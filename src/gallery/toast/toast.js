@@ -275,7 +275,7 @@ toast.hide = function () {
  *
  */
 _toastSetup.CSSText = function () {
-    var csstext = '.am-toast{position:fixed;z-index:100;top:45%;left:50%;text-align:center;font-size:16px;font-family:sans-serif;}' +
+    var csstext = '.am-toast{position:fixed;z-index:100;top:45%;width:100%;height:1px;text-align:center;font-size:16px;font-family:sans-serif;}' +
         '.am-toast .am-toast-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-toast .am-toast-text .iconfont{font-size:16px;}' +
         '.am-toast-show{display:block;}' +
