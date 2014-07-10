@@ -149,14 +149,8 @@ var _loadingSetup = {
         var that = this;
         var HTMLText = this.HTMLText().replace('<%loading-type%>', loading.options.type);
         HTMLText = HTMLText.replace('<%loading-message%>', loading.options.message);
-        var setPostion = function(loadingDom){
-            window.setTimeout(function(){
-                loadingDom.style.marginLeft = '-' + loadingDom.offsetWidth / 2 + 'px';
-            }, 0)
-        }
         if (this.isSetHTML) {
             this.loadingDom.innerHTML = HTMLText;
-            setPostion(that.loadingDom);
         } else {
             var loadingDom = document.createElement('div');
             loadingDom.className = 'am-loading am-loading-hide';
@@ -164,16 +158,38 @@ var _loadingSetup = {
             document.body.appendChild(loadingDom);
             this.loadingDom = loadingDom;
             this.isSetHTML = true;
-            setPostion(that.loadingDom);
         }
+        that.setPostion(that.loadingDom);
         return this;
+    },
+    /**
+     * @description 定位（绝对居中）
+     *
+     */
+    setPostion : function(toastDom){
+        console.log(toastDom.offsetWidth)
+
+        toastDom.style.display = "inline-block";
+        toastDom.style.visibility = "hidden";
+
+
+        console.log(toastDom.offsetWidth)
+        console.log(getComputedStyle(toastDom).width)
+
+
+
+
+
+        toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
+        toastDom.style.marginTop = '-' + toastDom.offsetHeight / 2 + 'px';
+        toastDom.style.display = "";
+        toastDom.style.visibility = "";
     },
     /**
      * @description 显示loading
      *
      */
     show: function () {
-        var that = this;
         this.hide();
         this.loadingDom.classList.remove('am-loading-hide');
         this.loadingDom.classList.add('am-loading-show');

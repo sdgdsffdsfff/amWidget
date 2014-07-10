@@ -150,14 +150,8 @@ var _toastSetup = {
         var that = this;
         var HTMLText = this.HTMLText().replace('<%toast-type%>', toast.options.type);
         HTMLText = HTMLText.replace('<%toast-message%>', toast.options.message);
-        var setPostion = function(toastDom){
-            window.setTimeout(function(){
-                toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
-            }, 0)
-        }
         if (this.isSetHTML) {
             this.toastDom.innerHTML = HTMLText;
-            setPostion(that.toastDom);
         } else {
             var toastDom = document.createElement('div');
             toastDom.className = 'am-toast am-toast-hide';
@@ -165,9 +159,25 @@ var _toastSetup = {
             document.body.appendChild(toastDom);
             this.toastDom = toastDom;
             this.isSetHTML = true;
-            setPostion(that.toastDom);
         }
         return this;
+    },
+    /**
+     * @description 定位（绝对居中）
+     *
+     */
+    setPostion : function(toastDom){
+        window.setTimeout(function(){
+
+
+
+
+
+            toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
+
+
+
+        }, 0)
     },
     /**
      * @description 显示toast
@@ -175,6 +185,7 @@ var _toastSetup = {
      */
     show: function () {
         this.hide();
+        this.setPostion(this.toastDom);
         this.toastDom.classList.remove('am-toast-hide');
         this.toastDom.classList.add('am-toast-show');
         this.hideDelay();
