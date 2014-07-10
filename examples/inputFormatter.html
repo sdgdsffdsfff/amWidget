@@ -22,6 +22,10 @@
         button {
             padding: 10px;
         }
+
+        .test {
+            margin-right: 10px;
+        }
     </style>
     <script src="lib/zepto.js"></script>
     <script type="text/javascript" src="lib/gallery/inputFormatter/inputFormatter.js"></script>
@@ -45,12 +49,17 @@
 
 <script type="text/javascript">
     $("#add_input").on("click", function () {
-        $("#tests").append('<div><input type="text" value="fdasfa" data-format="3#" class="test"/><button class="addFormat">增加input功能</button></div>');
+        $("#tests").append('<div class="am-flexbox">' +
+                '<div class="am-flexbox-item">' +
+                '<input type="text" value="fdasfa" data-format="3#" class="test"/></div>' +
+                '<button class="addFormat am-button am-button-sm am-flexbox-item">增加formatter功能</button>' +
+                '</div>');
     });
 
     var inputFormatter = window.AW.inputFormatter;
     $(".addFormat").live("click", function () {
-        inputFormatter.listen(document.querySelectorAll(".test"));
+        inputFormatter.listen($(this).parents(".am-flexbox").find(".test"));
+        $(this).remove();
     });
 </script>
 </body>

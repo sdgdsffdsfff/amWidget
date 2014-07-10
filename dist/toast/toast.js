@@ -170,7 +170,15 @@ var _toastSetup = {
      */
     setPostion : function(toastDom){
         window.setTimeout(function(){
+
+
+
+
+
             toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
+
+
+
         }, 0)
     },
     /**
@@ -179,9 +187,9 @@ var _toastSetup = {
      */
     show: function () {
         this.hide();
+        this.setPostion(this.toastDom);
         this.toastDom.classList.remove('am-toast-hide');
         this.toastDom.classList.add('am-toast-show');
-        this.setPostion(this.toastDom);
         this.hideDelay();
     },
     /**

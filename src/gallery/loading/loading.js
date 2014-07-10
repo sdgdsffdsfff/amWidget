@@ -159,7 +159,7 @@ var _loadingSetup = {
             this.loadingDom = loadingDom;
             this.isSetHTML = true;
         }
-        that.setPostion(that.loadingDom);
+        //that.setPostion(that.loadingDom);
         return this;
     },
     /**
@@ -167,23 +167,21 @@ var _loadingSetup = {
      *
      */
     setPostion : function(toastDom){
-        console.log(toastDom.offsetWidth)
+        var cssConfig = 'display:inline-block;visibility:hidden';
+        toastDom.style.cssText = cssConfig;
 
-        toastDom.style.display = "inline-block";
-        toastDom.style.visibility = "hidden";
+        console.log(document.querySelector(".am-loading").offsetWidth)
 
-
-        console.log(toastDom.offsetWidth)
-        console.log(getComputedStyle(toastDom).width)
-
-
+        window.setTimeout(function(){
+            console.log(document.querySelector(".am-loading").offsetWidth)
+        }, 200)
 
 
+        window.setTimeout(function(){
+            cssConfig = 'margin-left:-' + parseInt(document.querySelector(".am-loading").offsetWidth / 2) + 'px;margin-top:-' + toastDom.offsetHeight / 2 + 'px';
+            toastDom.style.cssText = cssConfig;
+        }, 100)
 
-        toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
-        toastDom.style.marginTop = '-' + toastDom.offsetHeight / 2 + 'px';
-        toastDom.style.display = "";
-        toastDom.style.visibility = "";
     },
     /**
      * @description 显示loading
@@ -279,7 +277,7 @@ loading.hide = function () {
  *
  */
 _loadingSetup.CSSText = function () {
-    var csstext = '.am-loading{position:fixed;z-index:100;top:45%;left:50%;text-align:center;font-size:16px;font-family:sans-serif;}' +
+    var csstext = '.am-loading{position:fixed;z-index:100;top:45%;width:100%;height:1px;text-align:center;font-size:16px;font-family:sans-serif;}' +
         '.am-loading .am-loading-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-loading .am-loading-text .iconfont{font-size:16px;}' +
         '.am-loading-show{display:block;}' +

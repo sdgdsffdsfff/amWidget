@@ -161,6 +161,7 @@ var _loadingSetup = {
             this.loadingDom = loadingDom;
             this.isSetHTML = true;
         }
+        that.setPostion(that.loadingDom);
         return this;
     },
     /**
@@ -168,9 +169,15 @@ var _loadingSetup = {
      *
      */
     setPostion : function(toastDom){
-        window.setTimeout(function(){
-            toastDom.style.marginLeft = '-' + toastDom.offsetWidth / 2 + 'px';
-        }, 0)
+        var cssConfig = 'display:inline-block;visibility:hidden';
+        toastDom.style.cssText = cssConfig;
+        console.log(toastDom.offsetWidth)
+        console.log(getComputedStyle(toastDom).width)
+
+
+
+        cssConfig = 'margin-left:-' + toastDom.offsetWidth / 2 + 'px;margin-top:-' + toastDom.offsetHeight / 2 + 'px';
+        toastDom.style.cssText = cssConfig;
     },
     /**
      * @description 显示loading
@@ -180,7 +187,6 @@ var _loadingSetup = {
         this.hide();
         this.loadingDom.classList.remove('am-loading-hide');
         this.loadingDom.classList.add('am-loading-show');
-        this.setPostion(this.loadingDom);
     },
     /**
      * @description 隐藏loading
@@ -267,7 +273,7 @@ loading.hide = function () {
  *
  */
 _loadingSetup.CSSText = function () {
-    var csstext = '.am-loading{position:fixed;z-index:100;top:45%;left:50%;text-align:center;font-size:16px;font-family:sans-serif;}' +
+    var csstext = '.am-loading{position:fixed;z-index:100;top:50%;left:50%;text-align:center;font-size:16px;font-family:sans-serif;}' +
         '.am-loading .am-loading-text{display:inline-block;margin:-24px auto auto;padding:9px 20px;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-webkit-background-clip:padding-box;color:#FFF;background-color:rgba(0,0,0,0.8);}' +
         '.am-loading .am-loading-text .iconfont{font-size:16px;}' +
         '.am-loading-show{display:block;}' +
