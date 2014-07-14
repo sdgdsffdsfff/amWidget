@@ -18,3 +18,6 @@ AMW的全程为alipay mobile widget，主要提供了移动端的widget库，为
 
 ## 后续
 会提供更多的控件，包括键盘，日历，多级滚轮等... 敬请期待
+
+### 使用方式
+[点击此链接](http://am-team.github.io/amw/aw-doc.html)

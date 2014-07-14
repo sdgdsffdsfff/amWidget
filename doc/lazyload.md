@@ -38,12 +38,32 @@ js
 	init: function (options)
 	
 	/**
-	 * 添加新的图片
+	 * 资源池新增图片并触发加载监控
 	 *
 	 * @memberof AW.lazyload
-	 * @param {?String|Object} addStack - 可以为选择器，可以为节点数据集，可以为节点
+	 * @param {?String|?Object} addStack - 可以为选择器，可以为节点数据集，可以为节点
 	 *
-	 * @desc 添加新的图片(可供外部调用)
+	 * @desc 资源池新增图片并触发加载监控
+	 *
+	 * @example
+	 * AW.lazyload.load('.lazy img');//选择器
+	 * AW.lazyload.load([Nodelist]);//节点Nodelist（伪数组）
+	 * AW.lazyload.load([Array]);//节点Array
+	 * AW.lazyload.load(ImageElement);//图片节点
+	 * AW.lazyload.load(OtherElement);//除图片外其它节点，找寻内部图片节点
+	 * AW.lazyload.load(jQueryObject);//jQuery节点集（伪数组）
+	 * AW.lazyload.load(ZeptoObject);//Zepto节点集（伪数组）
+	 *
+	 */
+	load: function (addStack)
+	
+	/**
+	 * 资源池新增图片
+	 *
+	 * @memberof AW.lazyload
+	 * @param {?String|?Object} addStack - 可以为选择器，可以为节点数据集，可以为节点
+	 *
+	 * @desc 资源池新增图片
 	 *
 	 * @example
 	 * AW.lazyload.add('.lazy img');//选择器
@@ -55,7 +75,41 @@ js
 	 * AW.lazyload.add(ZeptoObject);//Zepto节点集（伪数组）
 	 *
 	 */
-	load: function (addStack)
+	add: function (addStack)
+	
+	/**
+	 * 对资源池添加懒加载监听，同一时间内有限运行仅一次
+	 *
+	 * @memberof AW.lazyload
+	 *
+	 * @desc 对资源池添加懒加载监听，同一时间内有限运行仅一次
+	 *
+	 * @example
+	 * AW.lazyload.addLoadListener();
+	 */
+	addLoadListener: function ()
+	
+	/**
+	 * 对资源池移除懒加载监听
+	 *
+	 * @memberof AW.lazyload
+	 *
+	 * @desc 对资源池移除懒加载监听
+	 *
+	 * @example
+	 * AW.lazyload.addLoadListener();
+	 */
+	removeLoadListener: function ()
+	
+	/**
+	 * 当前时机，执行一次懒加载遍历尝试
+	 *
+	 * @memberof AW.lazyload
+	 *
+	 * @desc 当前时机，执行一次懒加载遍历尝试
+	 *
+	 */
+	run: function ()
 	
 ```
 

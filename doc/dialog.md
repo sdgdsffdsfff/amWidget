@@ -37,43 +37,37 @@ js
 ### 接口列表
 
 ```javascript
+
 	/**
-	 * 显示toast
+	 * @description        显示dialog
+	 * @param {string|object} options
 	 *
-	 * @memberof AW.dialog
-	 *
-	 * @desc 外部调用
-	 *
+	 * @memberof    AW
 	 */
-	show: function (callback)
+	dialog.show = function (options, fn)
 	
 	/**
-	 * 隐藏toast
+	 * @description        显示dialog
+	 * @param {string|object} options
 	 *
-	 * @memberof AW.dialog
-	 *
-	 * @desc 外部调用
-	 *
+	 * @memberof    AW
 	 */
-	hide: function ()
+	dialog.alert = function (message, fn)
 	
 	/**
-	 * 确认按钮的回调函数
+	 * @description        显示dialog
+	 * @param {string|object} options
 	 *
-	 * @memberof AW.dialog
-	 *
-	 * @type {Function}
+	 * @memberof    AW
 	 */
-	success: function ()
+	dialog.confirm = function (message, fn)
 	
 	/**
-	 * 取消按钮的回调函数
+	 * @description        隐藏dialog
 	 *
-	 * @memberof AW.dialog
-	 *
-	 * @type {Function}
+	 * @memberof    AW.dialog
 	 */
-	cancel: function ()
+	dialog.hide = function ()
 	
 ```
 
