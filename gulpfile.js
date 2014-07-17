@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	uglify = require('gulp-uglify');
 
-gulp.task('am-transport', function () {
+gulp.task('build', function () {
 	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./dist/'))
@@ -22,4 +22,4 @@ gulp.task('doc', function () {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['am-transport']);
+gulp.task('default', ['build']);
