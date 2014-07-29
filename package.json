@@ -26,12 +26,12 @@
 		"gulp-rename": "~1.2.0"
 	},
 	"gallery": {
-		"button": "1.0.0",
-		"dialog": "1.0.0",
-		"inputFormatter": "1.0.0",
-		"lazyload": "1.0.0",
-		"loading": "1.0.0",
-		"toast": "1.0.0"
+		"button": "1.0.1",
+		"dialog": "1.0.1",
+		"inputFormatter": "1.0.1",
+		"lazyload": "1.0.1",
+		"loading": "1.0.1",
+		"toast": "1.0.1"
 	}
 
 }
