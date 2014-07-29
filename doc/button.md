@@ -1,10 +1,12 @@
 ## button
-	模拟按钮在按下移动后回复无点击状态
+
+模拟按钮在按下的同时，手指移动后恢复未点击状态
 
 ### 示例代码
 html
 在html表里直接使用以下的标志，该组件在dom ready之后，会对以下所有具有这样特性的button进行初始化
-```
+
+```html
 <button data-active-class="hover">			//声明按下的状态效果class名为hover
 ```
 js
