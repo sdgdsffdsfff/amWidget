@@ -12,7 +12,7 @@ html
 js
 ```javascript
 	var list = document.getElementsByTagName("input");	//获取输入框元素集
-	AJ.inputFormatter.listen(list);					//list为要监听的元素以数组形式的集合
+	AW.inputFormatter.listen(list);					//list为要监听的元素以数组形式的集合
 ```
 
 
