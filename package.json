@@ -17,6 +17,9 @@
 	},
 	"keywords": [],
 	"licenses": "MIT",
+	"dependencies": {
+		"gulp-amw-dest": "*"
+	},
 	"devDependencies": {
 		"gulp-util": "~2.2.14",
 		"gulp": "*",

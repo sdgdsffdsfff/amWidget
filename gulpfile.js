@@ -1,15 +1,14 @@
 var gulp = require('gulp'),
 	amTransportGulp = require('gulp-am-transport'),
-	concat = require('gulp-concat'),
-	rename = require('gulp-rename'),
-	uglify = require('gulp-uglify');
+	uglify = require('gulp-uglify'),
+	amwDest = require('gulp-amw-dest');
 
 gulp.task('build', function () {
 	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./examples/lib/gallery/'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./dist/'));
+		.pipe(amwDest('./dist/'));
 });
 
 gulp.task('doc', function () {
