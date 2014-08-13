@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dateScroller demo示例</title>
+	 <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no,email=no"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+     <link rel="stylesheet" type="text/css" href="http://static.alipayobjects.com/amui/base/1.0.1/amui-https.css"
+          media="all">      
+	<link rel="stylesheet" href="lib/gallery/DateScroller/datescroller.css">
+<style>
+	#container{
+		width: 98%;
+		border: 2px solid #aaa;
+		margin: 20px auto;
+	}
+	body{
+		padding:0;
+		margin:0;
+	}			
+</style>
+</head>
+
+<body>
+   	<div class="am-header">
+    <h1>datePicker Demo</h1>
+	</div> 
+	<div id="tests">
+		<div class="am-list am-list-flat am-list-flat-chip">
+			 <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="普通文本框" value="">
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		    <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="开始日期（data-format='yyyy/mm/dd'）" value="" data-type="date" data-format="YYYY/mm/dd">
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		    <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="结束日期（data-format='yyyy.mm.dd'）" value="" data-type="date" data-format="YYYY.mm.dd">
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		      <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="开始日期" value="" data-type="date" >
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		     <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="普通文本框" value="">
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		    <div class="am-list-item am-list-item-form am-input-autoclear">
+		        <div class="am-list-control">
+		            <input type="text" placeholder="结束日期" value="" data-type="date" >
+		        </div>
+		        <div class="am-list-clear"><i class="am-icon-clear"></i></div>
+		    </div>
+		</div>
+		<!-- <div class="" style="height:240px; border:1px solid #ddd; margin:10px;">间隔</div> -->
+
+<!-- 		<div class="" style="height:340px; border:1px solid #ddd; margin:10px;">间隔</div> -->
+		
+
+	</div>
+	 <input type="text" placeholder="结束日期" value="" data-type="date" >
+	
+
+
+<script  type="text/javascript" src="lib/gallery/DateScroller/DateScroller.js"></script>
+
+<!-- <script  type="text/javascript" src="lib/gallery/Scroller/scroller.js"></script> -->
+<script>
+ var dateScroller = new AW.DateScroller({
+	    container: byId('container'),
+	    // lunar: true,
+	    defaultDate: {
+	      year: 2014,
+	      month: 7,
+	      day: 21
+	    }
+	  });
+	  console.log(1);
+	
+
+/*	  byId('selectDate').addEventListener('click', function() {
+	    dateScroller.select({
+	      year: 2011,
+	      month: 11,
+	      day: 11
+	    })
+	  }, false);*/
+
+
+	function byId(id) {
+	  return document.getElementById(id)
+	}
+
+	function print(content) {
+	  byId('console').innerHTML += 'Console -> ' + content + '<br/>';
+	}
+
+
+/*	window.addEventListener('load', function () {
+		setTimeout(function () {
+			document.body.scrollTop = 100;
+		}, 0)
+	}, false);*/
+</script>
+</body>
+
+</html>

@@ -82,7 +82,7 @@ var buttonStorage = [];
  * @param {Object} ele 传入Element类型的值
  *
  * @example
- * var button = new Button(document.getElementById('button')});
+ * var button =  Button(document.getElementById('button')});
  */
 var Button = function (ele) {
 	var btn, t = this;
@@ -122,7 +122,7 @@ Button.prototype.autoDisabled = false;
  * @param {Button} button - Button类的实例
  * @returns {void}
  * @example
- * bindTap(new Button(document.getElementById('button')}));
+ * bindTap(Button(document.getElementById('button')}));
  */
 function bindTap(button) {
 	button.ele.style['-webkit-user-select'] = 'none';
@@ -180,7 +180,7 @@ function bindTap(button) {
  * @returns {Button}
  *
  * @example
- * var button = new Button(document.getElementById('button')}).tap(function(){});
+ * var button = Button(document.getElementById('button')}).tap(function(){});
  */
 Button.prototype.tap = function (fn, timelock, enableAutoDisabled) {
 	if ('boolean' === type(fn)) {

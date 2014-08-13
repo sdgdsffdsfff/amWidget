@@ -9,13 +9,13 @@ gulp.task('build', function () {
 		.pipe(amTransportGulp({family: "AW"}))
 		.pipe(gulp.dest('./examples/lib/gallery/'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./dist/'))
+		.pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('doc', function () {
 	gulp.src('./doc/*.md')
 		.pipe(concat('aw-doc.md'))
-		.pipe(gulp.dest('./doc/build'))
+		.pipe(gulp.dest('./doc/build'));
 });
 
 // The default task (called when you run `gulp` from cli)
