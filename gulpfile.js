@@ -11,6 +11,15 @@ gulp.task('build', function () {
 		.pipe(amwDest('./dist/'));
 });
 
+gulp.task('buildCMD', function () {
+	gulp.src('./src/gallery/**/*.js')
+		.pipe(amTransportGulp({family: "AW", loader: "cmd", uglify: true}))
+		.pipe(amwDest('./dist/', "cmd"));
+	gulp.src('./src/gallery/**/README.md')
+		.pipe(amwDest('./dist/', "cmd"));
+
+});
+
 gulp.task('doc', function () {
 	gulp.src('./doc/*.md')
 		.pipe(concat('aw-doc.md'))
