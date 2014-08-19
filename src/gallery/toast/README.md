@@ -12,7 +12,12 @@ toast提示
 
 ```javascript
 AW.toast.show('认证成功');
-```
+
+//seajs使用方式
+seajs.use("amw-toast",function(toast){
+	toast.show('认证成功');
+});
+
 ```
 
 ## Api
@@ -47,6 +52,11 @@ AW.toast.show('认证成功');
 
 ```javascript
 AW.toast.show('认证成功');
+
+//seajs使用方式
+seajs.use("amw-toast",function(toast){
+	toast.show('认证成功');
+});
 ```
 
 或者完整参数调用：
@@ -58,10 +68,25 @@ AW.toast.show({
     hideDelay: '2500',
     callContainer: true
 });
+
+//seajs使用方式
+seajs.use("amw-toast",function(toast){
+	toast.show({
+        message: '认证成功',
+        type: 'success',
+        hideDelay: '2500',
+        callContainer: true
+    })
+});
 ```
 
 #### toast.hide() 隐藏toast
 
 ```javascript
 AW.toast.hide();
+
+//seajs使用方式
+seajs.use("amw-toast",function(toast){
+	toast.hide();
+});
 ```
