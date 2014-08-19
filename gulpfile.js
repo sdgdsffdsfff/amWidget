@@ -6,22 +6,22 @@ var gulp = require('gulp'),
 
 gulp.task('build', function () {
 	gulp.src('./src/gallery/**/*.js')
+		.pipe(amTransportGulp({family: "AW", uglify: true}))
+		.pipe(amwDest('./dist/amw/'));
+
+	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW"}))
-		.pipe(gulp.dest('./examples/lib/gallery/'))
-		.pipe(uglify())
-		.pipe(amwDest('./dist/'));
+		.pipe(gulp.dest('./examples/lib/gallery/'));
 });
 
 gulp.task('buildCMD', function () {
 	gulp.src('./src/gallery/**/*.js')
-		.pipe(amTransportGulp({family: "AW", loader: "cmd", uglify: true}))
+		.pipe(amTransportGulp({family: "AW", loader: "cmd"}))
 		.pipe(rename({suffix: ".cmd"}))
 		.pipe(amwDest('./dist/', "cmd"));
-	gulp.src(['./src/gallery/**/README.md','./src/gallery/**/package.json'])
-		.pipe(amwDest('./dist/', "cmd"));
-//	gulp.src('./src/gallery/**/package.json')
-//		.pipe(amwDest('./dist/', "cmd"));
 
+	gulp.src(['./src/gallery/**/README.md', './src/gallery/**/package.json'])
+		.pipe(amwDest('./dist/', "cmd"));
 
 });
 
