@@ -1,0 +1,23 @@
+{
+	"name": "amw-button",
+	"version": "1.0.1",
+	"description": "button widget",
+	"keywords": [],
+	"homepage": "",
+	"author": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/am-team/amWidget"
+	},
+	"bugs": {
+		"url": ""
+	},
+	"licenses": "MIT",
+	"spm": {
+		"main": "button.cmd.js",
+		"dependencies": {
+		},
+		"devDependencies": {
+		}
+	}
+}
