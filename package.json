@@ -28,13 +28,5 @@
 		"gulp-concat": "*",
 		"gulp-uglify": "*",
 		"gulp-rename": "~1.2.0"
-	},
-	"gallery": {
-		"button": "1.0.1",
-		"dialog": "1.0.1",
-		"inputFormatter": "1.0.1",
-		"lazyload": "1.0.1",
-		"loading": "1.0.1",
-		"toast": "1.0.1"
 	}
 }
