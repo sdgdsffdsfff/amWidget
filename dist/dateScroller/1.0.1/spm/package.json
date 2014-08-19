@@ -1,7 +1,7 @@
 {
-	"name": "amw-button",
+	"name": "amw-dateScroller",
 	"version": "1.0.1",
-	"description": "button widget",
+	"description": "dateScroller widget",
 	"keywords": [],
 	"homepage": "",
 	"author": "",
@@ -14,7 +14,7 @@
 	},
 	"licenses": "MIT",
 	"spm": {
-		"main": "button.cmd.js",
+		"main": "dateScroller.cmd.js",
 		"dependencies": {
 		},
 		"devDependencies": {

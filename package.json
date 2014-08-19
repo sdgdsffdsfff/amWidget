@@ -19,7 +19,8 @@
 	"licenses": "MIT",
 	"dependencies": {
 		"gulp-amw-dest": "*",
-		"gulp-am-transport": "*"
+		"gulp-am-transport": "*",
+		"gulp-shell": "*"
 	},
 	"devDependencies": {
 		"gulp-util": "~2.2.14",

@@ -1,5 +1,5 @@
 {
-	"name": "amw-button",
+	"name": "amw-inputFormatter",
 	"version": "1.0.1",
 	"description": "button widget",
 	"keywords": [],
@@ -14,7 +14,7 @@
 	},
 	"licenses": "MIT",
 	"spm": {
-		"main": "button.cmd.js",
+		"main": "inputFormatter.js",
 		"dependencies": {
 		},
 		"devDependencies": {

@@ -15,10 +15,13 @@ gulp.task('build', function () {
 gulp.task('buildCMD', function () {
 	gulp.src('./src/gallery/**/*.js')
 		.pipe(amTransportGulp({family: "AW", loader: "cmd", uglify: true}))
-		.pipe(rename({extname: ".cmd.js"}))
+		.pipe(rename({suffix: ".cmd"}))
 		.pipe(amwDest('./dist/', "cmd"));
-	gulp.src('./src/gallery/**/README.md')
+	gulp.src(['./src/gallery/**/README.md','./src/gallery/**/package.json'])
 		.pipe(amwDest('./dist/', "cmd"));
+//	gulp.src('./src/gallery/**/package.json')
+//		.pipe(amwDest('./dist/', "cmd"));
+
 
 });
 

@@ -1,7 +1,7 @@
 {
-	"name": "amw-button",
+	"name": "amw-loading",
 	"version": "1.0.1",
-	"description": "button widget",
+	"description": "loading widget",
 	"keywords": [],
 	"homepage": "",
 	"author": "",
@@ -14,7 +14,7 @@
 	},
 	"licenses": "MIT",
 	"spm": {
-		"main": "button.cmd.js",
+		"main": "loading.cmd.js",
 		"dependencies": {
 		},
 		"devDependencies": {
